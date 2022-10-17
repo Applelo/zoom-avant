@@ -7,9 +7,6 @@
   --vp-c-brand: var(--main-color);
   --vp-c-brand-light: var(--light-color);
 
-  /*Body*/
-  --vp-c-bg: #1c1c1c;
-
   /* Home */
   --vp-home-hero-name-background: linear-gradient(
     90deg,
@@ -25,6 +22,11 @@
   --vp-button-brand-hover-bg: var(--main-color);
   --vp-button-brand-hover-border: var(--highlight-color);
   --vp-button-brand-hover-text: var(--highlight-color);
+}
+
+.dark body {
+  /*Body*/
+  --vp-c-bg: #1c1c1c;
 }
 
 .dark .VPNav.no-sidebar {
