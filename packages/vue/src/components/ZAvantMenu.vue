@@ -8,25 +8,19 @@ const state = useGlobalState()
 </script>
 
 <template>
-  <button @click="state.next">
-    <slot name="button">
+  <button @click="state.next" role="menuitem">
+    <slot name="button" role="menuitem">
       {{ props.name }}
     </slot>
   </button>
-  <ul class="zavant__menu" ref="menu">
-    <button @click="state.previous">
-      <slot name="back">
-        {{ state.options.value.back }}
-      </slot>
-    </button>
+  <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
+    <li role="presentation">
+      <button @click="state.previous" role="menuitem">
+        <slot name="back">
+          {{ state.options.value.back }}
+        </slot>
+      </button>
+    </li>
     <slot name="default" />
   </ul>
 </template>
-
-<style>
-.zavant__menu {
-  margin: 0;
-  list-style: none;
-  padding: 0;
-}
-</style>

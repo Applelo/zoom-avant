@@ -39,7 +39,12 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-.zavant > .zavant__menu {
+.zavant {
   margin: 16px 0;
+  border: 1px solid black;
+}
+
+.zavant__item {
+  padding: 8px 0;
 }
 </style>

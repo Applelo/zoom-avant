@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { ZAvantTree } from './../typings'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, unref } from 'vue'
+import type { ZAvantTree } from './../typings'
 import { useGlobalState } from './../store'
 
 const state = useGlobalState()
@@ -22,26 +22,14 @@ const classes = computed(() => {
   }
 })
 
-const menu = ref<HTMLUListElement | null>(null)
-watch(state.level, () => {
-  if (!menu.value) return
-  menu.value.style.transform = `translateX(${(state.level.value - 1) * -100}%)`
+const styles = computed(() => {
+  return {
+    height: state.currentEl.value
+      ? `${state.currentEl.value.clientHeight}px`
+      : '',
+    transform: `translateX(${unref(state.level) * -100}%)`
+  }
 })
-
-watch(state.height, () => {
-  if (!menu.value) return
-  menu.value.style.height = `${state.height.value}px`
-})
-
-const initTree = () => {
-  if (!menu.value) return
-
-  const tree = createTree({
-    height: computed(() => (menu.value ? menu.value.clientHeight : 0)),
-    el: menu.value,
-    children: []
-  })
-}
 
 const createTree = (tree: ZAvantTree): ZAvantTree => {
   const childrenItem = tree.el.children
@@ -54,7 +42,6 @@ const createTree = (tree: ZAvantTree): ZAvantTree => {
 
     children.push(
       createTree({
-        height: computed(() => menu.clientHeight),
         el: menu,
         children: []
       })
@@ -64,15 +51,23 @@ const createTree = (tree: ZAvantTree): ZAvantTree => {
   return tree
 }
 
+const menu = ref<HTMLUListElement | null>(null)
 onMounted(() => {
-  if (!menu.value) return
-  state.height.value = menu.value.clientHeight
-  initTree()
+  const unrefMenu = unref(menu)
+  if (!unrefMenu) return
+  state.currentEl.value = unrefMenu
+
+  const tree = createTree({
+    el: unrefMenu,
+    children: []
+  })
+
+  state.tree.value = tree
 })
 </script>
 <template>
   <div class="zavant" :class="classes">
-    <ul class="zavant__wrapper" ref="menu">
+    <ul class="zavant__wrapper" :style="styles" ref="menu" role="menu">
       <slot />
     </ul>
   </div>
@@ -82,11 +77,19 @@ onMounted(() => {
   overflow: hidden;
 }
 
-.zavant__wrapper {
-  margin: 0;
+.zavant ul {
   list-style: none;
+  margin: 0;
   padding: 0;
+}
+
+.zavant__wrapper {
   will-change: transform;
   transition: 0.3s transform;
+}
+
+.zavant--dynamic-height .zavant__wrapper {
+  will-change: transform, height;
+  transition: 0.3s transform, 0.3s height;
 }
 </style>

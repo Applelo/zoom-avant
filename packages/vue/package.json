@@ -24,14 +24,16 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "@vueuse/core": "^9.3.1"
   },
   "devDependencies": {
+    "@types/lodash.get": "^4.4.7",
     "@vitejs/plugin-vue": "^3.1.2",
-    "@vueuse/core": "^9.3.1",
     "typescript": "^4.8.4",
     "vite": "^3.1.8",
     "vite-plugin-dts": "^1.6.6",
+    "lodash.get": "^4.4.2",
     "vue-tsc": "^1.0.8"
   }
 }
