@@ -16,6 +16,9 @@ import ZAvantMenuItem from './../../vue/src/components/ZAvantMenuItem.vue'
             <template #button>
               <span> le monde </span>
             </template>
+            <template #back>
+              <span>Retour</span>
+            </template>
             <template #default>
               <ZAvantMenuItem>
                 <a href="#">Hello</a>
