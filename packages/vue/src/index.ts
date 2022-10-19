@@ -1,14 +1,5 @@
-import type { App } from 'vue'
-import components from './components'
+import ZAvant from './components/ZAvant.vue'
+import ZAvantMenu from './components/ZAvantMenu.vue'
+import ZAvantMenuItem from './components/ZAvantMenuItem.vue'
 
-const plugin = {
-  install(app: App) {
-    for (const prop in components) {
-      // @ts-expect-error: I want to index import using string
-      const component = components[prop]
-      app.component(component.name, component)
-    }
-  }
-}
-
-export default plugin
+export { ZAvant, ZAvantMenu, ZAvantMenuItem }

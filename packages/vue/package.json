@@ -17,15 +17,14 @@
   "types": "dist",
   "scripts": {
     "dev": "vite build --watch",
-    "build": "vite build && vue-tsc --emitDeclarationOnly --declaration",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "vue": "^3.2.41",
-    "@vueuse/core": "^9.3.1"
+    "vue": "^3.2.41"
   },
   "devDependencies": {
     "@types/lodash.get": "^4.4.7",

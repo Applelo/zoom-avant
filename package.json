@@ -3,16 +3,6 @@
   "version": "0.5.0",
   "description": "",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs"
-    }
-  },
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {},
   "keywords": [],
   "author": "",

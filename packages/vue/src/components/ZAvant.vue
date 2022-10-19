@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, unref } from 'vue'
-import type { ZAvantTree } from './../typings'
-import { useGlobalState } from './../store'
+import { computed, onMounted, ref, unref, provide } from 'vue'
+import ZAvant from '../provider'
 
-const state = useGlobalState()
+provide('ZAvant', ZAvant)
+
 const props = withDefaults(
   defineProps<{
     dynamicHeight?: boolean
@@ -14,7 +14,9 @@ const props = withDefaults(
     back: 'Back'
   }
 )
-state.options.value = props
+ZAvant.options.value = props
+
+const menu = ref<HTMLUListElement | null>(null)
 
 const classes = computed(() => {
   return {
@@ -23,46 +25,15 @@ const classes = computed(() => {
 })
 
 const styles = computed(() => {
+  const unrefCurrentEl = unref(ZAvant.state.currentEl)
   return {
-    height: state.currentEl.value
-      ? `${state.currentEl.value.clientHeight}px`
-      : '',
-    transform: `translateX(${unref(state.level) * -100}%)`
+    height: unrefCurrentEl ? `${unrefCurrentEl.clientHeight}px` : '',
+    transform: `translateX(${unref(ZAvant.state.level) * -100}%)`
   }
 })
 
-const createTree = (tree: ZAvantTree): ZAvantTree => {
-  const childrenItem = tree.el.children
-  const children = []
-  for (let index = 0; index < childrenItem.length; index++) {
-    const childItem = childrenItem[index]
-    const menu = childItem.querySelector<HTMLUListElement>('.zavant__menu')
-
-    if (!menu) continue
-
-    children.push(
-      createTree({
-        el: menu,
-        children: []
-      })
-    )
-  }
-  tree.children = children
-  return tree
-}
-
-const menu = ref<HTMLUListElement | null>(null)
 onMounted(() => {
-  const unrefMenu = unref(menu)
-  if (!unrefMenu) return
-  state.currentEl.value = unrefMenu
-
-  const tree = createTree({
-    el: unrefMenu,
-    children: []
-  })
-
-  state.tree.value = tree
+  ZAvant.methods.init(menu)
 })
 </script>
 <template>

@@ -1,9 +1,9 @@
-<script lang="ts" setup></script>
 <template>
   <li class="zavant__item" role="presentation">
     <slot />
   </li>
 </template>
+
 <style>
 .zavant__item > .zavant__menu {
   position: absolute;
