@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import ZAvant from './../../vue/src/components/ZAvant.vue'
-import ZAvantMenu from './../../vue/src/components/ZAvantMenu.vue'
-import ZAvantMenuItem from './../../vue/src/components/ZAvantMenuItem.vue'
+import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
 </script>
 
 <template>

@@ -1,0 +1,31 @@
+.zavant {
+  overflow: hidden;
+}
+
+.zavant--dynamic-height {
+  will-change: height;
+  transition: 0.3s height;
+}
+
+.zavant ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.zavant__wrapper {
+  will-change: transform;
+  transition: 0.3s transform;
+}
+
+.zavant__item > .zavant__menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(100%);
+  width: 100%;
+}
+
+.zavant__item > .zavant__menu[aria-hidden='true'] {
+  z-index: -1;
+}

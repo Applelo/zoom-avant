@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
-import type { ZAvantProvider } from './../typings'
+import ZAvantProvider from './../zavant'
 
 const ZAvant = inject('ZAvant') as ZAvantProvider
 
@@ -10,16 +10,16 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button @click="ZAvant.methods.next" role="menuitem">
+  <button @click="ZAvant.next" role="menuitem">
     <slot name="button" role="menuitem">
       {{ props.name }}
     </slot>
   </button>
   <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
     <li role="presentation">
-      <button @click="ZAvant.methods.back" role="menuitem">
+      <button @click="ZAvant.back" role="menuitem">
         <slot name="back">
-          {{ ZAvant.options.value.back }}
+          {{ ZAvant.options.back }}
         </slot>
       </button>
     </li>
