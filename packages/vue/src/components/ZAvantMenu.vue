@@ -10,14 +10,19 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button @click="ZAvant.next" role="menuitem" aria-haspopup="true">
+  <button
+    @click="ZAvant.next"
+    class="zavant__next"
+    role="menuitem"
+    aria-haspopup="true"
+  >
     <slot name="button" role="menuitem">
       {{ props.name }}
     </slot>
   </button>
   <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
-    <li role="none" class="zavant__item">
-      <button @click="ZAvant.back" role="menuitem">
+    <li role="none" class="zavant__item zavant__item--back">
+      <button @click="ZAvant.back" class="zavant__back" role="menuitem">
         <slot name="back">
           {{ ZAvant.options.back }}
         </slot>

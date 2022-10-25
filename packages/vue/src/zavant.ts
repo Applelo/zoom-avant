@@ -25,7 +25,7 @@ export default class ZAvantProvider {
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
-  private _rootClass: ComputedRef<Record<string, boolean>>
+  private _rootClass: ComputedRef<string[]>
   private _rootStyle: ComputedRef<StyleValue>
   private _wrapperStyle: ComputedRef<StyleValue>
   private _height: Ref<number>
@@ -52,9 +52,10 @@ export default class ZAvantProvider {
     })
 
     this._rootClass = computed(() => {
-      return {
-        'zavant--dynamic-height': !!options.dynamicHeight
-      }
+      const classes = [`zavant--level-${this.level}`]
+      if (!!options.dynamicHeight) classes.push('zavant--dynamic-height')
+
+      return classes
     })
 
     this._rootStyle = computed(() => {
