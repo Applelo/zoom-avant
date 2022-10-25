@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, provide } from 'vue'
+import { onMounted, ref, provide, onBeforeUnmount } from 'vue'
 import ZAvantProvider from '../zavant'
 
 const props = withDefaults(
@@ -18,6 +18,10 @@ provide('ZAvant', ZAvant)
 const menu = ref<HTMLUListElement | null>(null)
 onMounted(() => {
   ZAvant.init(menu)
+})
+
+onBeforeUnmount(() => {
+  ZAvant.destroy()
 })
 </script>
 

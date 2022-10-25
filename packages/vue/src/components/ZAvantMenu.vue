@@ -16,7 +16,7 @@ const props = defineProps<{
     </slot>
   </button>
   <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
-    <li role="none">
+    <li role="none" class="zavant__item">
       <button @click="ZAvant.back" role="menuitem">
         <slot name="back">
           {{ ZAvant.options.back }}

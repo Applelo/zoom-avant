@@ -1,4 +1,13 @@
-import { computed, ref, unref, Ref, ComputedRef, StyleValue, watch } from 'vue'
+import {
+  computed,
+  ref,
+  unref,
+  Ref,
+  ComputedRef,
+  StyleValue,
+  watch,
+  WatchStopHandle
+} from 'vue'
 import get from 'lodash.get'
 
 interface ZAvantTree {
@@ -22,6 +31,7 @@ export default class ZAvantProvider {
   private _height: Ref<number>
 
   private _resizeObserver: ResizeObserver
+  private _unwatchCurrentEl: WatchStopHandle
 
   constructor(
     options: Readonly<{
@@ -37,7 +47,7 @@ export default class ZAvantProvider {
     this._level = computed(() => this.path.length)
 
     this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
-    watch(this._currentEl, () => {
+    this._unwatchCurrentEl = watch(this._currentEl, () => {
       this.getHeightWithOptions()
     })
 
@@ -77,7 +87,10 @@ export default class ZAvantProvider {
     this._resizeObserver.observe(unrefRoot)
   }
 
-  public destroy() {}
+  public destroy() {
+    this._resizeObserver.disconnect()
+    this._unwatchCurrentEl()
+  }
 
   private addTree(tree: ZAvantTree): ZAvantTree {
     const childrenItem = tree.el.children

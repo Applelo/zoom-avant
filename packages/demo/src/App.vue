@@ -71,7 +71,7 @@ body {
 }
 
 hr {
-  margin: 64px 0;
+  margin: 32px 0;
 }
 
 .zavant {
@@ -79,6 +79,6 @@ hr {
 }
 
 .zavant__item {
-  padding: 8px 0;
+  padding: 8px;
 }
 </style>
