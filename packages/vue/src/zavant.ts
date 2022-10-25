@@ -1,4 +1,4 @@
-import { computed, ref, unref, Ref, ComputedRef, StyleValue } from 'vue'
+import { computed, ref, unref, Ref, ComputedRef, StyleValue, watch } from 'vue'
 import get from 'lodash.get'
 
 interface ZAvantTree {
@@ -19,6 +19,9 @@ export default class ZAvantProvider {
   private _rootClass: ComputedRef<Record<string, boolean>>
   private _rootStyle: ComputedRef<StyleValue>
   private _wrapperStyle: ComputedRef<StyleValue>
+  private _height: Ref<number>
+
+  private _resizeObserver: ResizeObserver
 
   constructor(
     options: Readonly<{
@@ -30,7 +33,14 @@ export default class ZAvantProvider {
     this._path = ref([])
     this._tree = ref<ZAvantTree | null>(null)
     this._currentEl = ref<HTMLUListElement | null>(null)
+    this._height = ref(0)
     this._level = computed(() => this.path.length)
+
+    this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
+    watch(this._currentEl, () => {
+      this.getHeightWithOptions()
+    })
+
     this._rootClass = computed(() => {
       return {
         'zavant--dynamic-height': !!options.dynamicHeight
@@ -38,14 +48,8 @@ export default class ZAvantProvider {
     })
 
     this._rootStyle = computed(() => {
-      let value = 0
-      if (options.dynamicHeight && this.currentEl) {
-        value = this.currentEl.clientHeight
-      }
-
-      const height = value ? `${value}px` : ''
       return {
-        height
+        height: this._height.value ? `${this._height.value}px` : ''
       }
     })
 
@@ -68,7 +72,12 @@ export default class ZAvantProvider {
     })
 
     this.tree = data
+
+    this.getHeightWithOptions()
+    this._resizeObserver.observe(unrefRoot)
   }
+
+  public destroy() {}
 
   private addTree(tree: ZAvantTree): ZAvantTree {
     const childrenItem = tree.el.children
@@ -91,6 +100,24 @@ export default class ZAvantProvider {
     tree.children = children
 
     return tree
+  }
+
+  private getHeightWithOptions() {
+    let height = 0
+
+    if (this.options.dynamicHeight === true && this.currentEl) {
+      height = this.currentEl.clientHeight
+    } else if (this.tree) {
+      const menus = this.tree.el.getElementsByClassName('zavant__menu')
+      height = this.tree.el.clientHeight
+      for (let index = 0; index < menus.length; index++) {
+        const element = menus[index]
+        if (element.clientHeight > height) height = element.clientHeight
+      }
+      this.height = height
+    }
+
+    this.height = height
   }
 
   private treePath() {
@@ -160,6 +187,14 @@ export default class ZAvantProvider {
 
   private get currentEl() {
     return unref(this._currentEl)
+  }
+
+  private set height(height) {
+    this._height.value = height
+  }
+
+  private get height() {
+    return unref(this._height)
   }
 
   public get level() {

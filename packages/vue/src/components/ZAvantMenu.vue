@@ -10,13 +10,13 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button @click="ZAvant.next" role="menuitem">
+  <button @click="ZAvant.next" role="menuitem" aria-haspopup="true">
     <slot name="button" role="menuitem">
       {{ props.name }}
     </slot>
   </button>
   <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
-    <li role="presentation">
+    <li role="none">
       <button @click="ZAvant.back" role="menuitem">
         <slot name="back">
           {{ ZAvant.options.back }}

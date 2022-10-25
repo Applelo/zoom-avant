@@ -8,7 +8,7 @@ const props = withDefaults(
     back?: string
   }>(),
   {
-    dynamicHeight: true,
+    dynamicHeight: false,
     back: 'Back'
   }
 )
@@ -26,8 +26,10 @@ onMounted(() => {
     <ul
       class="zavant__wrapper"
       ref="menu"
-      role="menu"
+      role="menubar"
       :style="ZAvant.wrapperStyle"
+      aria-multiselectable="false"
+      aria-orientation="vertical"
     >
       <slot />
     </ul>
