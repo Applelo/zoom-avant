@@ -28,7 +28,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="zavant" :class="ZAvant.rootClass" :style="ZAvant.rootStyle">
     <ul
-      class="zavant__wrapper"
+      class="zavant__menu zavant__menu--wrapper"
       ref="menu"
       role="menubar"
       :style="ZAvant.wrapperStyle"

@@ -86,11 +86,67 @@ export default class ZAvantProvider {
 
     this.getHeightWithOptions()
     this._resizeObserver.observe(unrefRoot)
+    this.initAccessibility(unrefRoot)
+    this.updateFocusableElements()
   }
 
   public destroy() {
     this._resizeObserver.disconnect()
     this._unwatchCurrentEl()
+  }
+
+  // Inspired by https://www.w3.org/WAI/ARIA/apg/patterns/menu/
+  private initAccessibility(unrefRoot: HTMLUListElement) {
+    unrefRoot.addEventListener('keydown', e => {
+      switch (e.key) {
+        case 'ArrowLeft':
+        case 'Left':
+          this.back()
+          break
+        case 'ArrowRight':
+        case 'Right':
+          const activeElement = document.activeElement as HTMLElement | null
+          if (
+            activeElement &&
+            activeElement.classList.contains('zavant__next')
+          ) {
+            this.next(activeElement)
+          }
+          break
+        case 'Esc':
+        case 'Escape':
+          //
+          break
+        case 'Home':
+        case 'PageUp':
+          // Moves focus to the first item in the submenu.
+          break
+        case 'End':
+        case 'PageDown':
+          // Moves focus to the last item in the submenu.
+          break
+        default:
+          // Character search
+          break
+      }
+    })
+  }
+
+  private updateFocusableElements() {
+    if (!this.currentEl || !this.tree) return
+
+    const children = Array.from(this.tree.el.getElementsByTagName('*'))
+    children.forEach(item => item.setAttribute('tabindex', '-1'))
+
+    const currentChildren = Array.from(this.currentEl.getElementsByTagName('*'))
+    currentChildren.forEach(item => item.removeAttribute('tabindex'))
+    this.currentEl.removeAttribute('tabindex')
+
+    const items = Array.from(
+      this.currentEl.querySelectorAll(':scope .zavant__menu *')
+    )
+    console.log(items)
+    items.forEach(item => item.setAttribute('tabindex', '-1'))
   }
 
   private addTree(tree: ZAvantTree): ZAvantTree {
@@ -146,9 +202,12 @@ export default class ZAvantProvider {
     return arr
   }
 
-  public next(e: Event) {
+  public next(e: Event | HTMLElement) {
     if (!this.tree) return
-    const target = e.target as HTMLElement | null
+    const target =
+      typeof e === 'object' && 'target' in e
+        ? (e.target as HTMLElement | null)
+        : e
     if (!target) return
 
     const button: HTMLElement | null =
@@ -166,6 +225,7 @@ export default class ZAvantProvider {
 
     this.path.push(index.toString())
     this.currentEl = children[index].el
+    this.updateFocusableElements()
   }
 
   public back() {
@@ -177,6 +237,7 @@ export default class ZAvantProvider {
       : this.tree.el
 
     this.currentEl = item
+    this.updateFocusableElements()
   }
 
   private set path(path) {

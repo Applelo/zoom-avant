@@ -10,6 +10,13 @@ import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
         <ZAvantMenuItem>Hello</ZAvantMenuItem>
         <ZAvantMenuItem>world</ZAvantMenuItem>
         <ZAvantMenuItem>Bonjour</ZAvantMenuItem>
+      </ZAvantMenu>
+    </ZAvantMenuItem>
+    <ZAvantMenuItem>
+      <ZAvantMenu name="prout">
+        <ZAvantMenuItem>Proute</ZAvantMenuItem>
+        <ZAvantMenuItem>wioefj</ZAvantMenuItem>
+        <ZAvantMenuItem>oefiwne</ZAvantMenuItem>
         <ZAvantMenuItem>
           <ZAvantMenu>
             <template #button>

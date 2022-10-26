@@ -7,13 +7,13 @@
   transition: 0.3s height;
 }
 
-.zavant ul {
+.zavant__menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.zavant__wrapper {
+.zavant__menu--wrapper {
   will-change: transform;
   transition: 0.3s transform;
 }
@@ -24,8 +24,4 @@
   left: 0;
   transform: translateX(100%);
   width: 100%;
-}
-
-.zavant__item > .zavant__menu[aria-hidden='true'] {
-  z-index: -1;
 }
