@@ -25,12 +25,14 @@ export default class ZAvantProvider {
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
+  private _rootEl: HTMLUListElement | null
   private _rootClass: ComputedRef<string[]>
   private _rootStyle: ComputedRef<StyleValue>
   private _wrapperStyle: ComputedRef<StyleValue>
   private _height: Ref<number>
 
   private _resizeObserver: ResizeObserver
+  private _mutationObserver: MutationObserver
   private _unwatchCurrentEl: WatchStopHandle
 
   constructor(
@@ -45,10 +47,14 @@ export default class ZAvantProvider {
     this._currentEl = ref<HTMLUListElement | null>(null)
     this._height = ref(0)
     this._level = computed(() => this.path.length)
+    this._rootEl = null
 
     this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
     this._unwatchCurrentEl = watch(this._currentEl, () => {
       this.getHeightWithOptions()
+    })
+    this._mutationObserver = new MutationObserver(() => {
+      this.update()
     })
 
     this._rootClass = computed(() => {
@@ -76,23 +82,15 @@ export default class ZAvantProvider {
     if (!unrefRoot) return
 
     this.currentEl = unrefRoot
+    this._rootEl = unrefRoot
 
-    const data = this.addTree({
-      el: unrefRoot,
-      children: []
-    })
+    this.update()
 
-    this.tree = data
-
-    this.getHeightWithOptions()
     this._resizeObserver.observe(unrefRoot)
+    this._mutationObserver.observe(unrefRoot, {
+      subtree: true
+    })
     this.initAccessibility(unrefRoot)
-    this.updateFocusableElements()
-  }
-
-  public destroy() {
-    this._resizeObserver.disconnect()
-    this._unwatchCurrentEl()
   }
 
   // Inspired by https://www.w3.org/WAI/ARIA/apg/patterns/menu/
@@ -132,10 +130,29 @@ export default class ZAvantProvider {
     })
   }
 
-  private updateFocusableElements() {
-    if (!this.currentEl || !this.tree) return
+  public destroy() {
+    this._resizeObserver.disconnect()
+    this._mutationObserver.disconnect()
+    this._unwatchCurrentEl()
+  }
 
-    const children = Array.from(this.tree.el.getElementsByTagName('*'))
+  private update() {
+    if (!this._rootEl) return
+
+    const data = this.createTree({
+      el: this._rootEl,
+      children: []
+    })
+
+    this.tree = data
+    this.getHeightWithOptions()
+    this.updateFocusableElements()
+  }
+
+  private updateFocusableElements() {
+    if (!this.currentEl || !this._rootEl) return
+
+    const children = Array.from(this._rootEl.getElementsByTagName('*'))
     children.forEach(item => item.setAttribute('tabindex', '-1'))
 
     const currentChildren = Array.from(this.currentEl.getElementsByTagName('*'))
@@ -145,11 +162,10 @@ export default class ZAvantProvider {
     const items = Array.from(
       this.currentEl.querySelectorAll(':scope .zavant__menu *')
     )
-    console.log(items)
     items.forEach(item => item.setAttribute('tabindex', '-1'))
   }
 
-  private addTree(tree: ZAvantTree): ZAvantTree {
+  private createTree(tree: ZAvantTree): ZAvantTree {
     const childrenItem = tree.el.children
     const children = []
 
@@ -160,7 +176,7 @@ export default class ZAvantProvider {
       if (!menu) continue
 
       children.push(
-        this.addTree({
+        this.createTree({
           el: menu,
           children: []
         })
