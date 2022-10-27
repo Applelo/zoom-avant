@@ -87,9 +87,9 @@ export default class ZAvantProvider {
     this.update()
 
     this._resizeObserver.observe(unrefRoot)
-    this._mutationObserver.observe(unrefRoot, {
-      subtree: true
-    })
+    // this._mutationObserver.observe(unrefRoot, {
+    //   subtree: true
+    // })
     this.initAccessibility(unrefRoot)
   }
 
@@ -118,6 +118,7 @@ export default class ZAvantProvider {
         case 'Home':
         case 'PageUp':
           // Moves focus to the first item in the submenu.
+          this.focusFirst()
           break
         case 'End':
         case 'PageDown':
@@ -163,6 +164,15 @@ export default class ZAvantProvider {
       this.currentEl.querySelectorAll(':scope .zavant__menu *')
     )
     items.forEach(item => item.setAttribute('tabindex', '-1'))
+  }
+
+  private focusFirst() {
+    if (!this.currentEl) return
+    const firstEl = this.currentEl.querySelector(
+      "button:not(.zavant__back), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+    ) as HTMLElement | null
+    if (firstEl) firstEl.focus()
+    this._rootEl?.parentElement?.scrollTo(0, 0)
   }
 
   private createTree(tree: ZAvantTree): ZAvantTree {
@@ -242,6 +252,7 @@ export default class ZAvantProvider {
     this.path.push(index.toString())
     this.currentEl = children[index].el
     this.updateFocusableElements()
+    this.focusFirst()
   }
 
   public back() {
