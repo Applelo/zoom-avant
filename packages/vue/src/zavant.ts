@@ -25,7 +25,8 @@ export default class ZAvantProvider {
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
-  private _rootEl: HTMLUListElement | null
+  private _rootEl: HTMLDivElement | null
+  private _wrapperEl: HTMLUListElement | null
   private _rootClass: ComputedRef<string[]>
   private _rootStyle: ComputedRef<StyleValue>
   private _wrapperStyle: ComputedRef<StyleValue>
@@ -34,6 +35,9 @@ export default class ZAvantProvider {
   private _resizeObserver: ResizeObserver
   private _mutationObserver: MutationObserver
   private _unwatchCurrentEl: WatchStopHandle
+
+  private readonly focusEls =
+    "button:not(.zavant__back), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
 
   constructor(
     options: Readonly<{
@@ -48,6 +52,7 @@ export default class ZAvantProvider {
     this._height = ref(0)
     this._level = computed(() => this.path.length)
     this._rootEl = null
+    this._wrapperEl = null
 
     this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
     this._unwatchCurrentEl = watch(this._currentEl, () => {
@@ -77,28 +82,31 @@ export default class ZAvantProvider {
     })
   }
 
-  public init(root: Ref<HTMLUListElement | null>) {
+  public init(root: Ref<HTMLDivElement | null>) {
     const unrefRoot = unref(root)
     if (!unrefRoot) return
 
-    this.currentEl = unrefRoot
     this._rootEl = unrefRoot
+    this._wrapperEl = this._rootEl.querySelector('.zavant__menu')
+    this.currentEl = this._wrapperEl
 
     this.update()
 
     this._resizeObserver.observe(unrefRoot)
-    // this._mutationObserver.observe(unrefRoot, {
-    //   subtree: true
-    // })
+    this._mutationObserver.observe(unrefRoot, {
+      childList: true
+    })
     this.initAccessibility(unrefRoot)
   }
 
   // Inspired by https://www.w3.org/WAI/ARIA/apg/patterns/menu/
-  private initAccessibility(unrefRoot: HTMLUListElement) {
+  private initAccessibility(unrefRoot: HTMLDivElement) {
     unrefRoot.addEventListener('keydown', e => {
       switch (e.key) {
         case 'ArrowLeft':
         case 'Left':
+        case 'Esc':
+        case 'Escape':
           this.back()
           break
         case 'ArrowRight':
@@ -111,10 +119,6 @@ export default class ZAvantProvider {
             this.next(activeElement)
           }
           break
-        case 'Esc':
-        case 'Escape':
-          //
-          break
         case 'Home':
         case 'PageUp':
           // Moves focus to the first item in the submenu.
@@ -123,6 +127,7 @@ export default class ZAvantProvider {
         case 'End':
         case 'PageDown':
           // Moves focus to the last item in the submenu.
+          this.focusLast()
           break
         default:
           // Character search
@@ -138,10 +143,10 @@ export default class ZAvantProvider {
   }
 
   private update() {
-    if (!this._rootEl) return
+    if (!this._wrapperEl) return
 
     const data = this.createTree({
-      el: this._rootEl,
+      el: this._wrapperEl,
       children: []
     })
 
@@ -167,12 +172,25 @@ export default class ZAvantProvider {
   }
 
   private focusFirst() {
-    if (!this.currentEl) return
-    const firstEl = this.currentEl.querySelector(
-      "button:not(.zavant__back), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
-    ) as HTMLElement | null
+    const firstEl = this.currentEl?.querySelector(this.focusEls) as
+      | HTMLElement
+      | null
+      | undefined
     if (firstEl) firstEl.focus()
-    this._rootEl?.parentElement?.scrollTo(0, 0)
+    console.log(firstEl)
+
+    this._rootEl?.scrollTo(0, 0)
+  }
+
+  private focusLast() {
+    const lastEl = this.currentEl?.querySelector(
+      this.focusEls
+        .split(',')
+        .map(s => ':scope > .zavant__item:last-child ' + s)
+        .join(',')
+    ) as HTMLElement | null | undefined
+    if (lastEl) lastEl.focus()
+    this._rootEl?.scrollTo(0, 0)
   }
 
   private createTree(tree: ZAvantTree): ZAvantTree {
@@ -252,12 +270,16 @@ export default class ZAvantProvider {
     this.path.push(index.toString())
     this.currentEl = children[index].el
     this.updateFocusableElements()
+    this.currentEl?.focus()
     this.focusFirst()
   }
 
   public back() {
     if (!this.tree || unref(this.level) === 0) return
 
+    const nextButton = this.currentEl?.previousElementSibling as
+      | HTMLButtonElement
+      | undefined
     this.path.pop()
     const item: ZAvantTree['el'] = this.level
       ? get(this.tree, this.treePath()).el
@@ -265,6 +287,7 @@ export default class ZAvantProvider {
 
     this.currentEl = item
     this.updateFocusableElements()
+    if (nextButton) nextButton.focus()
   }
 
   private set path(path) {
