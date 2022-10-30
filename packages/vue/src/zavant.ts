@@ -37,7 +37,7 @@ export default class ZAvantProvider {
   private _unwatchCurrentEl: WatchStopHandle
 
   private readonly focusEls =
-    "button:not(.zavant__back), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+    '*:is(button, a, input, select, textarea, [tabindex]):not([tabindex="-1"])'
 
   constructor(
     options: Readonly<{
@@ -103,14 +103,26 @@ export default class ZAvantProvider {
   private initAccessibility(unrefRoot: HTMLDivElement) {
     unrefRoot.addEventListener('keydown', e => {
       switch (e.key) {
+        case 'ArrowUp':
+        case 'Up':
+          //Focus to previous element
+          this.focusSibling('previous')
+          break
+        case 'ArrowDown':
+        case 'Down':
+          //Focus to next element
+          this.focusSibling('next')
+          break
         case 'ArrowLeft':
         case 'Left':
         case 'Esc':
         case 'Escape':
+          // Go to the previous element
           this.back()
           break
         case 'ArrowRight':
         case 'Right':
+          //Go to next element
           const activeElement = document.activeElement as HTMLElement | null
           if (
             activeElement &&
@@ -128,6 +140,9 @@ export default class ZAvantProvider {
         case 'PageDown':
           // Moves focus to the last item in the submenu.
           this.focusLast()
+          break
+        case 'Tab':
+          // Leave the menu
           break
         default:
           // Character search
@@ -172,25 +187,51 @@ export default class ZAvantProvider {
   }
 
   private focusFirst() {
-    const firstEl = this.currentEl?.querySelector(this.focusEls) as
-      | HTMLElement
-      | null
-      | undefined
+    const firstEl = this.currentEl?.querySelector<HTMLElement>(this.focusEls)
     if (firstEl) firstEl.focus()
-    console.log(firstEl)
 
     this._rootEl?.scrollTo(0, 0)
   }
 
   private focusLast() {
-    const lastEl = this.currentEl?.querySelector(
+    const lastEl = this.currentEl?.querySelector<HTMLElement>(
       this.focusEls
         .split(',')
         .map(s => ':scope > .zavant__item:last-child ' + s)
         .join(',')
-    ) as HTMLElement | null | undefined
+    )
     if (lastEl) lastEl.focus()
     this._rootEl?.scrollTo(0, 0)
+  }
+
+  private focusSibling(dir: 'next' | 'previous') {
+    const activeElement = document.activeElement as HTMLElement | null
+    if (!activeElement || !this.currentEl) return this.focusFirst()
+    const currentItem = activeElement.closest('.zavant__item')
+    const items = Array.from(this.currentEl.querySelectorAll(':scope > *'))
+    const currentItemIndex = items.findIndex(item => currentItem === item)
+    if (currentItemIndex === -1) return this.focusFirst()
+
+    if (dir === 'next' && currentItemIndex === items.length - 1) {
+      return this.focusFirst()
+    } else if (dir === 'previous' && currentItemIndex === 0) {
+      return this.focusLast()
+    }
+
+    for (
+      let index = dir === 'next' ? currentItemIndex + 1 : currentItemIndex - 1;
+      dir === 'next' ? index < items.length : index >= 0;
+      dir === 'next' ? index++ : index--
+    ) {
+      const item = items[index]
+      const focusEl = item.querySelector<HTMLElement>(this.focusEls)
+      if (focusEl) {
+        focusEl.focus()
+        return
+      }
+    }
+
+    return dir === 'next' ? this.focusFirst() : this.focusLast()
   }
 
   private createTree(tree: ZAvantTree): ZAvantTree {
