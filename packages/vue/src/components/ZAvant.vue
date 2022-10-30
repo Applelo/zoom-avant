@@ -15,9 +15,9 @@ const props = withDefaults(
 const ZAvant = new ZAvantProvider(props)
 provide('ZAvant', ZAvant)
 
-const menu = ref<HTMLUListElement | null>(null)
+const root = ref<HTMLDivElement | null>(null)
 onMounted(() => {
-  ZAvant.init(menu)
+  ZAvant.init(root)
 })
 
 onBeforeUnmount(() => {
@@ -26,10 +26,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="zavant" :class="ZAvant.rootClass" :style="ZAvant.rootStyle">
+  <div
+    class="zavant"
+    ref="root"
+    :class="ZAvant.rootClass"
+    :style="ZAvant.rootStyle"
+  >
     <ul
       class="zavant__menu zavant__menu--wrapper"
-      ref="menu"
       role="menubar"
       :style="ZAvant.wrapperStyle"
       aria-multiselectable="false"
