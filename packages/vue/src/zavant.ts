@@ -141,10 +141,6 @@ export default class ZAvantProvider {
           // Moves focus to the last item in the submenu.
           this.focusLast()
           break
-        // case 'Tab':
-        //   // Leave the menu
-        //   this.back()
-        //   break
         default:
           // Character search
           this.focusChar(e.key)
@@ -243,8 +239,6 @@ export default class ZAvantProvider {
 
   private focusChar(char: string) {
     if (!this.currentEl) return
-
-    console.log(char)
 
     const items = Array.from(this.currentEl.querySelectorAll(':scope > *'))
     for (let index = 0; index < items.length; index++) {

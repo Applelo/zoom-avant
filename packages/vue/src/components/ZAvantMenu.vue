@@ -22,12 +22,7 @@ const props = defineProps<{
       {{ props.next }}
     </slot>
   </button>
-  <ul
-    :id="`zavant-menu-${$.uid}`"
-    class="zavant__menu"
-    aria-hidden="true"
-    role="menu"
-  >
+  <ul :id="`zavant-menu-${$.uid}`" class="zavant__menu" role="menu">
     <li role="none" class="zavant__item zavant__item--back">
       <button @click="ZAvant.back" class="zavant__back" role="menuitem">
         <slot name="back">

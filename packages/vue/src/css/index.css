@@ -25,3 +25,9 @@
   transform: translateX(100%);
   width: 100%;
 }
+
+.zavant__next[aria-expanded='false'] + .zavant__menu {
+  visibility: hidden;
+  transition-property: visibility;
+  transition-delay: 0.3s;
+}
