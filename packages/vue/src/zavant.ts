@@ -305,6 +305,8 @@ export default class ZAvantProvider {
       target.tagName === 'BUTTON' ? target : target.closest('button')
     if (!button) return
 
+    button.setAttribute('aria-expanded', 'true')
+
     const menu = button.nextElementSibling
     if (!menu) return
 
@@ -328,6 +330,7 @@ export default class ZAvantProvider {
     const nextButton = this.currentEl?.previousElementSibling as
       | HTMLButtonElement
       | undefined
+
     this.path.pop()
     const item: ZAvantTree['el'] = this.level
       ? get(this.tree, this.treePath()).el
@@ -337,7 +340,11 @@ export default class ZAvantProvider {
     this.updateFocusableElements()
 
     this.currentEl?.focus()
-    if (nextButton) nextButton.focus()
+
+    if (nextButton) {
+      nextButton.setAttribute('aria-expanded', 'false')
+      nextButton.focus()
+    }
   }
 
   private set path(path) {

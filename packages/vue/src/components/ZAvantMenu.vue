@@ -15,6 +15,7 @@ const props = defineProps<{
     class="zavant__next"
     role="menuitem"
     aria-haspopup="true"
+    aria-expanded="false"
     :aria-controls="`zavant-menu-${$.uid}`"
   >
     <slot name="next" role="menuitem">
