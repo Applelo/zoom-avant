@@ -141,9 +141,10 @@ export default class ZAvantProvider {
           // Moves focus to the last item in the submenu.
           this.focusLast()
           break
-        case 'Tab':
-          // Leave the menu
-          break
+        // case 'Tab':
+        //   // Leave the menu
+        //   this.back()
+        //   break
         default:
           // Character search
           break
@@ -194,19 +195,24 @@ export default class ZAvantProvider {
   }
 
   private focusLast() {
-    const lastEl = this.currentEl?.querySelector<HTMLElement>(
-      this.focusEls
-        .split(',')
-        .map(s => ':scope > .zavant__item:last-child ' + s)
-        .join(',')
-    )
-    if (lastEl) lastEl.focus()
-    this._rootEl?.scrollTo(0, 0)
+    if (!this.currentEl) return
+
+    const items = Array.from(this.currentEl.querySelectorAll(':scope > *'))
+
+    for (let index = items.length - 1; index >= 0; index--) {
+      const item = items[index]
+      const focusEl = item.querySelector<HTMLElement>(this.focusEls)
+      if (focusEl) {
+        focusEl.focus()
+        return
+      }
+    }
   }
 
   private focusSibling(dir: 'next' | 'previous') {
     const activeElement = document.activeElement as HTMLElement | null
     if (!activeElement || !this.currentEl) return this.focusFirst()
+
     const currentItem = activeElement.closest('.zavant__item')
     const items = Array.from(this.currentEl.querySelectorAll(':scope > *'))
     const currentItemIndex = items.findIndex(item => currentItem === item)
@@ -311,6 +317,7 @@ export default class ZAvantProvider {
     this.path.push(index.toString())
     this.currentEl = children[index].el
     this.updateFocusableElements()
+
     this.currentEl?.focus()
     this.focusFirst()
   }
@@ -328,6 +335,8 @@ export default class ZAvantProvider {
 
     this.currentEl = item
     this.updateFocusableElements()
+
+    this.currentEl?.focus()
     if (nextButton) nextButton.focus()
   }
 

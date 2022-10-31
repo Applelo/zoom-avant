@@ -6,20 +6,20 @@ import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
   <p>Dynamic Height enable</p>
   <ZAvant :dynamic-height="true">
     <ZAvantMenuItem>
-      <ZAvantMenu name="Hello world">
+      <ZAvantMenu next="Next 1">
         <ZAvantMenuItem>Hello</ZAvantMenuItem>
         <ZAvantMenuItem>world</ZAvantMenuItem>
         <ZAvantMenuItem>Bonjour</ZAvantMenuItem>
       </ZAvantMenu>
     </ZAvantMenuItem>
     <ZAvantMenuItem>
-      <ZAvantMenu name="prout">
+      <ZAvantMenu next="Next 2">
         <ZAvantMenuItem>Proute</ZAvantMenuItem>
         <ZAvantMenuItem>wioefj</ZAvantMenuItem>
         <ZAvantMenuItem>oefiwne</ZAvantMenuItem>
         <ZAvantMenuItem>
           <ZAvantMenu>
-            <template #button>
+            <template #next>
               <span> le monde </span>
             </template>
             <template #back>
@@ -43,7 +43,7 @@ import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
   </ZAvant>
   <hr />
   <p>Dynamic Height disable (default)</p>
-  <ZAvant>
+  <ZAvant back="Retour">
     <ZAvantMenuItem>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur
       eligendi architecto provident rem dolores praesentium, ipsam repudiandae
@@ -52,7 +52,7 @@ import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
     </ZAvantMenuItem>
     <ZAvantMenuItem>
       <ZAvantMenu>
-        <template #button>
+        <template #next>
           <span> le monde </span>
         </template>
         <template #back>
@@ -65,6 +65,7 @@ import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
           <ZAvantMenuItem>
             <a href="#">world</a>
           </ZAvantMenuItem>
+          <ZAvantMenuItem> Hello World </ZAvantMenuItem>
         </template>
       </ZAvantMenu>
     </ZAvantMenuItem>

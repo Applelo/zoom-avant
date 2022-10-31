@@ -5,7 +5,7 @@ import ZAvantProvider from './../zavant'
 const ZAvant = inject('ZAvant') as ZAvantProvider
 
 const props = defineProps<{
-  name?: string
+  next?: string
 }>()
 </script>
 
@@ -15,12 +15,18 @@ const props = defineProps<{
     class="zavant__next"
     role="menuitem"
     aria-haspopup="true"
+    :aria-controls="`zavant-menu-${$.uid}`"
   >
-    <slot name="button" role="menuitem">
-      {{ props.name }}
+    <slot name="next" role="menuitem">
+      {{ props.next }}
     </slot>
   </button>
-  <ul class="zavant__menu" ref="menu" aria-hidden="true" role="group">
+  <ul
+    :id="`zavant-menu-${$.uid}`"
+    class="zavant__menu"
+    aria-hidden="true"
+    role="menu"
+  >
     <li role="none" class="zavant__item zavant__item--back">
       <button @click="ZAvant.back" class="zavant__back" role="menuitem">
         <slot name="back">
