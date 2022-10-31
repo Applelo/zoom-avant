@@ -147,6 +147,7 @@ export default class ZAvantProvider {
         //   break
         default:
           // Character search
+          this.focusChar(e.key)
           break
       }
     })
@@ -238,6 +239,27 @@ export default class ZAvantProvider {
     }
 
     return dir === 'next' ? this.focusFirst() : this.focusLast()
+  }
+
+  private focusChar(char: string) {
+    if (!this.currentEl) return
+
+    console.log(char)
+
+    const items = Array.from(this.currentEl.querySelectorAll(':scope > *'))
+    for (let index = 0; index < items.length; index++) {
+      const item = items[index]
+      const focusEl = item.querySelector<HTMLElement>(this.focusEls)
+
+      if (
+        focusEl &&
+        focusEl.textContent &&
+        focusEl.textContent.trim().toLowerCase()[0] === char
+      ) {
+        focusEl.focus()
+        return
+      }
+    }
   }
 
   private createTree(tree: ZAvantTree): ZAvantTree {
