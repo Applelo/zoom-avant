@@ -2,20 +2,10 @@
   overflow: hidden;
 }
 
-.zavant--dynamic-height {
-  will-change: height;
-  transition: 0.3s height;
-}
-
 .zavant__menu {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.zavant__menu--wrapper {
-  will-change: transform;
-  transition: 0.3s transform;
 }
 
 .zavant__item > .zavant__menu {
@@ -28,6 +18,4 @@
 
 .zavant__next[aria-expanded='false'] + .zavant__menu {
   visibility: hidden;
-  transition-property: visibility;
-  transition-delay: 0.3s;
 }

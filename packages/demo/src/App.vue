@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ZAvant, ZAvantMenu, ZAvantMenuItem } from './../../vue/src/index'
+import { ZAvant, ZAvantMenu, ZAvantMenuItem } from '@zoom-avant/vue'
+import '@zoom-avant/vue/css'
 </script>
 
 <template>

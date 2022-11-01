@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref, provide, onBeforeUnmount } from 'vue'
-import ZAvantProvider from '../zavant'
+import ZAvantProvider from '@/zavant'
 
 const props = withDefaults(
   defineProps<{

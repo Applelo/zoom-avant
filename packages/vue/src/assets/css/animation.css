@@ -1,0 +1,14 @@
+.zavant__menu--wrapper {
+  will-change: transform;
+  transition: 0.3s transform;
+}
+
+.zavant__next[aria-expanded='false'] + .zavant__menu {
+  transition-property: visibility;
+  transition-delay: 0.3s;
+}
+
+.zavant--dynamic-height {
+  will-change: height;
+  transition: 0.3s height;
+}

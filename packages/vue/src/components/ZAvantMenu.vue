@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
-import ZAvantProvider from './../zavant'
+import ZAvantProvider from '@/zavant'
 
 const ZAvant = inject('ZAvant') as ZAvantProvider
 
