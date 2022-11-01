@@ -1,4 +1,6 @@
-import.meta.glob('./assets/css/*.css', { eager: true })
+import.meta.glob(['./assets/css/*.css', '!./assets/css/theme.css'], {
+  eager: true
+})
 
 import ZAvant from './components/ZAvant.vue'
 import ZAvantMenu from './components/ZAvantMenu.vue'

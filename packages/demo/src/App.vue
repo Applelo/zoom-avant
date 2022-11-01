@@ -82,12 +82,4 @@ body {
 hr {
   margin: 32px 0;
 }
-
-.zavant {
-  border: 1px solid black;
-}
-
-.zavant__item {
-  padding: 8px;
-}
 </style>

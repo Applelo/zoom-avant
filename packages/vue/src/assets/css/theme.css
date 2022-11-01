@@ -1,0 +1,43 @@
+.zavant__back,
+.zavant__next {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.zavant__next::after,
+.zavant__back::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px;
+}
+
+.zavant__next::after {
+  border-right-width: 6px;
+  border-right-width: 0;
+  border-color: transparent transparent transparent #000;
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+  right: 0;
+}
+
+.zavant__back::before {
+  border-left-width: 6px;
+  border-left-width: 0;
+  border-color: transparent #000 transparent transparent;
+  margin-right: 0.75rem;
+}
+
+.zavant__item {
+  padding: 0.5rem 0;
+}
