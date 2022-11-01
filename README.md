@@ -4,13 +4,13 @@
 
 > This module is not compatible with VueJS 2
 
-## 🚀 Features
+## Features
 
 - 🚀 Simple and efficient using modern API
 - ✨ Customizable to meet every need
 - 🖖 Accessible : respect W3C WAI Aria Menu pattern
 
-## 📦 Install
+## Install
 
 For **VueJS 3**
 
