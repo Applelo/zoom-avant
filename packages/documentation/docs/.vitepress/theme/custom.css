@@ -6,6 +6,7 @@
 
   --vp-c-brand: var(--main-color);
   --vp-c-brand-light: var(--light-color);
+  --vp-c-brand-dark: var(--highlight-color);
 
   /* Home */
   --vp-home-hero-name-background: linear-gradient(
@@ -27,6 +28,7 @@
 .dark body {
   /*Body*/
   --vp-c-bg: #1c1c1c;
+  --vp-c-bg-alt: #2a2929;
 }
 
 .dark .VPNav.no-sidebar {

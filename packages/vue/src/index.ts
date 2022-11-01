@@ -1,4 +1,4 @@
-import.meta.glob(['./assets/css/*.css', '!./assets/css/theme.css'], {
+import.meta.glob(['./assets/css/*.css'], {
   eager: true
 })
 
