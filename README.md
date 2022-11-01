@@ -38,7 +38,12 @@ pnpm add -D @zoom-avant/nuxt
 
 ## Usage
 
-```html
+```vue
+<script setup lang="ts">
+import { ZAvant, ZAvantMenu, ZAvantMenuItem } from '@zoom-avant/vue'
+import '@zoom-avant/vue/css'
+</script>
+
 <ZAvant :dynamic-height="true">
   <ZAvantMenuItem>
     <ZAvantMenu next="Next 1">
