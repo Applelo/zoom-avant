@@ -32,8 +32,8 @@ export default class ZAvantProvider {
   private _wrapperStyle: ComputedRef<StyleValue>
   private _height: Ref<number>
 
-  private _resizeObserver: ResizeObserver|null
-  private _mutationObserver: MutationObserver|null
+  private _resizeObserver: ResizeObserver | null
+  private _mutationObserver: MutationObserver | null
   private _unwatchCurrentEl: WatchStopHandle
 
   private readonly focusEls =
