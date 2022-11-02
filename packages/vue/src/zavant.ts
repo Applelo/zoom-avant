@@ -32,8 +32,8 @@ export default class ZAvantProvider {
   private _wrapperStyle: ComputedRef<StyleValue>
   private _height: Ref<number>
 
-  private _resizeObserver: ResizeObserver
-  private _mutationObserver: MutationObserver
+  private _resizeObserver: ResizeObserver|null
+  private _mutationObserver: MutationObserver|null
   private _unwatchCurrentEl: WatchStopHandle
 
   private readonly focusEls =
@@ -54,12 +54,11 @@ export default class ZAvantProvider {
     this._rootEl = null
     this._wrapperEl = null
 
-    this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
+    this._resizeObserver = null
+    this._mutationObserver = null
+
     this._unwatchCurrentEl = watch(this._currentEl, () => {
       this.getHeightWithOptions()
-    })
-    this._mutationObserver = new MutationObserver(() => {
-      this.update()
     })
 
     this._rootClass = computed(() => {
@@ -92,10 +91,16 @@ export default class ZAvantProvider {
 
     this.update()
 
+    this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
+    this._mutationObserver = new MutationObserver(() => {
+      this.update()
+    })
+
     this._resizeObserver.observe(unrefRoot)
     this._mutationObserver.observe(unrefRoot, {
       childList: true
     })
+
     this.initAccessibility(unrefRoot)
   }
 
@@ -150,8 +155,8 @@ export default class ZAvantProvider {
   }
 
   public destroy() {
-    this._resizeObserver.disconnect()
-    this._mutationObserver.disconnect()
+    if (this._resizeObserver) this._resizeObserver.disconnect()
+    if (this._mutationObserver) this._mutationObserver.disconnect()
     this._unwatchCurrentEl()
   }
 

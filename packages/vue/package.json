@@ -1,7 +1,7 @@
 {
   "name": "@zoom-avant/vue",
   "type": "module",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "",
   "main": "./dist/zoom-avant.umd.cjs",
   "module": "./dist/zoom-avant.js",
