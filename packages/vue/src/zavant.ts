@@ -63,7 +63,7 @@ export default class ZAvantProvider {
 
     this._rootClass = computed(() => {
       const classes = [`zavant--level-${this.level}`]
-      if (!!options.dynamicHeight) classes.push('zavant--dynamic-height')
+      if (options.dynamicHeight) classes.push('zavant--dynamic-height')
 
       return classes
     })
@@ -91,15 +91,22 @@ export default class ZAvantProvider {
 
     this.update()
 
-    this._resizeObserver = new ResizeObserver(() => this.getHeightWithOptions())
-    this._mutationObserver = new MutationObserver(() => {
-      this.update()
-    })
+    if (
+      typeof ResizeObserver !== 'undefined' &&
+      typeof MutationObserver !== 'undefined'
+    ) {
+      this._resizeObserver = new ResizeObserver(() =>
+        this.getHeightWithOptions()
+      )
+      this._mutationObserver = new MutationObserver(() => {
+        this.update()
+      })
 
-    this._resizeObserver.observe(unrefRoot)
-    this._mutationObserver.observe(unrefRoot, {
-      childList: true
-    })
+      this._resizeObserver.observe(unrefRoot)
+      this._mutationObserver.observe(unrefRoot, {
+        childList: true
+      })
+    }
 
     this.initAccessibility(unrefRoot)
   }
@@ -126,7 +133,7 @@ export default class ZAvantProvider {
           this.back()
           break
         case 'ArrowRight':
-        case 'Right':
+        case 'Right': {
           //Go to next element
           const activeElement = document.activeElement as HTMLElement | null
           if (
@@ -136,6 +143,7 @@ export default class ZAvantProvider {
             this.next(activeElement)
           }
           break
+        }
         case 'Home':
         case 'PageUp':
           // Moves focus to the first item in the submenu.

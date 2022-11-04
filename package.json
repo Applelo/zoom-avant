@@ -1,9 +1,20 @@
 {
-  "name": "zoom-avant",
-  "version": "0.5.0",
+  "name": "@zoom-avant/root",
+  "private": "true",
+  "packageManager": "pnpm@7.9.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "version": "0.6.0",
   "description": "",
   "type": "module",
-  "scripts": {},
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "lint": "prettier -c .",
+    "lint:fix": "prettier --write --cache ."
+  },
   "keywords": [],
   "author": "",
   "license": "GPL-3.0",
