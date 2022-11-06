@@ -2,29 +2,31 @@
  * @vitest-env node
  */
 import { fileURLToPath } from 'node:url'
-import { describe, it, expect, beforeAll } from 'vitest'
-import {
-  setup
-  // $fetch,
-  // useTestContext,
-  // startServer,
-  // loadFixture
-} from '@nuxt/test-utils'
+import { describe, it, expect } from 'vitest'
+import { setup, $fetch, stopServer } from '@nuxt/test-utils'
 
-describe('works with nuxt', async () => {
-  beforeAll(async () => {
-    await setup({
-      server: true,
-      rootDir: fileURLToPath(new URL('../playground', import.meta.url))
-    })
-    // await loadFixture()
-    // const ctx = useTestContext()
-    // await startServer()
+describe('ssr', async () => {
+  await setup({
+    rootDir: fileURLToPath(new URL('../playground', import.meta.url))
   })
+  it('renders the index page', async () => {
+    // Get response to a server-rendered page with `$fetch`.
+    const html = await $fetch('/')
+    expect(html).contain('zavant zavant--level-0 zavant--dynamic-height')
+  })
+  //await stopServer()
+})
 
-  //  // FIXME: this is consistently failing, seems to not be configured well with nuxt
-  //  it.skip('works on ssr', async () => {
-  //    const html = await $fetch('/')
-  //    expect(html).toContain('Count: 101')
-  //  })
+// Not working currently
+describe.skip('client', async () => {
+  // await setup({
+  //   rootDir: fileURLToPath(new URL('../playground', import.meta.url)),
+  //   server: true,
+  // })
+  // useTestContext()
+  // it('renders the index page', async () => {
+  //   // Get response to a server-rendered page with `$fetch`.
+  //   const html = await $fetch('/')
+  //   expect(html).toMatchSnapshot()
+  // })
 })
