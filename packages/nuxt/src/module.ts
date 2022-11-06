@@ -1,25 +1,25 @@
 import { defineNuxtModule, addComponent } from '@nuxt/kit'
 
-type ModuleOptionsCSS = 'base' | 'animation' | 'theme'
+type ModuleOptionsStyles = 'base' | 'animation' | 'theme'
 
 export interface ModuleOptions {
-  css: ModuleOptionsCSS[]
+  styles?: ModuleOptionsStyles[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: '@zoom-avant/nuxt',
-    configKey: 'zavant'
-    // compatibility: { nuxt: '^3.0.0' || '^3.0.0-rc.13' }
+    configKey: 'zavant',
+    compatibility: { nuxt: '^3.0.0-rc.13' }
   },
   defaults: {
-    css: []
+    styles: []
   },
   setup(options, nuxt) {
-    if (options.css.length) {
-      for (let index = 0; index < options.css.length; index++) {
-        const part = options.css[index]
-        nuxt.options.css.push(`@zoom-avant/vue/css/${part}`)
+    if (options.styles && options.styles.length) {
+      for (let index = 0; index < options.styles.length; index++) {
+        const style = options.styles[index]
+        nuxt.options.css.push(`@zoom-avant/vue/css/${style}`)
       }
     } else {
       nuxt.options.css.push('@zoom-avant/vue/css')

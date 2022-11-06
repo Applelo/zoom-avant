@@ -13,13 +13,20 @@
   },
   "scripts": {
     "lint": "prettier -c .",
-    "lint:fix": "prettier --write --cache ."
+    "lint:fix": "prettier --write --cache .",
+    "test": "pnpm run test:vitest && pnpm run test:types",
+    "test:vitest": "vitest run --coverage",
+    "test:types": "pnpm run -r test:types"
   },
   "keywords": [],
   "author": "",
   "license": "GPL-3.0",
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "@vitest/coverage-c8": "^0.24.5",
+    "c8": "^7.12.0",
+    "prettier": "^2.7.1",
+    "vitest": "^0.24.5",
+    "vue": "^3.2.41"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -1,7 +1,4 @@
 {
   "private": true,
-  "name": "my-module-playground",
-  "devDependencies": {
-    "@types/node": "^18.11.9"
-  }
+  "name": "zoom-avant-playground"
 }
