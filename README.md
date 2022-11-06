@@ -72,7 +72,7 @@ In your template, add the ZoomAvant structure :
       </ZAvantMenu>
     </ZAvantMenuItem>
     <ZAvantMenuItem>
-      <ZAvantMenu next="Next 2">
+      <ZAvantMenu next="Next 2" back="Next 2">
         <ZAvantMenuItem>Cheese</ZAvantMenuItem>
         <ZAvantMenuItem>Fromage</ZAvantMenuItem>
         <ZAvantMenuItem>Brie</ZAvantMenuItem>
