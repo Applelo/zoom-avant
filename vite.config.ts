@@ -1,28 +1,10 @@
 /// <reference types="vitest" />
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
 export default defineConfig({
-  resolve: {
-    alias: [
-      {
-        find: /^@zoom-avant\/(.*?)$/,
-        replacement: fileURLToPath(
-          new URL('./packages/$1/src', import.meta.url)
-        )
-      }
-      // {
-      //   find: /^pinia$/,
-      //   replacement: fileURLToPath(
-      //     new URL('./packages/pinia/src', import.meta.url)
-      //   ),
-      // },
-    ]
-  },
+  plugins: [vue()],
   test: {
-    coverage: {
-      reporter: ['html', 'lcov', 'text'],
-      include: ['packages/vue/src/**/*.ts'],
-      exclude: ['**/src/index.ts', '**/*.d.ts']
-    }
+    environment: 'happy-dom'
   }
 })

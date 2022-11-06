@@ -6,6 +6,7 @@ const ZAvant = inject('ZAvant') as ZAvantProvider
 
 const props = defineProps<{
   next?: string
+  back?: string
 }>()
 </script>
 
@@ -26,7 +27,7 @@ const props = defineProps<{
     <li role="none" class="zavant__item zavant__item--back">
       <button @click="ZAvant.back" class="zavant__back" role="menuitem">
         <slot name="back">
-          {{ ZAvant.options.back }}
+          {{ props.back || ZAvant.options.back }}
         </slot>
       </button>
     </li>
