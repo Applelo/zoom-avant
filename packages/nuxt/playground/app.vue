@@ -8,7 +8,7 @@
       </ZAvantMenu>
     </ZAvantMenuItem>
     <ZAvantMenuItem>
-      <ZAvantMenu next="Next 2">
+      <ZAvantMenu next="Next 2" back="Back 2">
         <ZAvantMenuItem>Cheese</ZAvantMenuItem>
         <ZAvantMenuItem>Fromage</ZAvantMenuItem>
         <ZAvantMenuItem>Brie</ZAvantMenuItem>
