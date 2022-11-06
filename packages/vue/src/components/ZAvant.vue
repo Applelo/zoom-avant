@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div
+  <nav
     class="zavant"
     ref="root"
     :class="ZAvant.rootClass"
@@ -41,5 +41,5 @@ onBeforeUnmount(() => {
     >
       <slot />
     </ul>
-  </div>
+  </nav>
 </template>
