@@ -5,7 +5,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "",
   "type": "module",
   "engines": {
@@ -23,10 +23,10 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "@testing-library/vue": "^6.6.1",
-    "happy-dom": "^7.6.6",
+    "happy-dom": "^7.6.7",
     "prettier": "^2.7.1",
-    "vitest": "^0.24.5",
-    "vue": "^3.2.41"
+    "vitest": "^0.25.1",
+    "vue": "^3.2.43"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -1,7 +1,5 @@
 # Zoom Avant
 
-> Currently in _alpha_
-
 **Zoom Avant** (pronounced /zum a.vɑ̃/) is a drilldown component for VueJS 3.
 
 > This module is not compatible with VueJS 2 and NuxtJS 2

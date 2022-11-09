@@ -11,10 +11,17 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/Applelo/zoom-avant' }
     ],
     sidebar: {
-      '/introduction/': [
+      '/guide/': [
         {
           text: 'Introduction',
-          items: [{ text: 'Installation', link: '/introduction/installation' }]
+          items: [
+            { text: 'Getting started', link: '/guide/' },
+            { text: 'Structure', link: '/guide/structure' },
+            { text: 'Components', link: '/guide/components' },
+            { text: 'Styles', link: '/guide/styles' },
+            { text: 'Nuxt', link: '/guide/nuxt' },
+            { text: 'Accessibility', link: '/guide/accessibility' }
+          ]
         }
       ]
     }
