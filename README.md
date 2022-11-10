@@ -1,3 +1,5 @@
+![Version](https://img.shields.io/github/package-json/v/applelo/zoom-avant) ![node-current (scoped)](https://img.shields.io/node/v/@zoom-avant/vue)
+
 # Zoom Avant
 
 **Zoom Avant** (pronounced /zum a.vɑ̃/) is a drilldown component for VueJS 3.
