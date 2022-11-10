@@ -35,7 +35,7 @@ importers:
       typescript: ^4.8.4
     dependencies:
       '@nuxt/kit': 3.0.0-rc.13
-      '@zoom-avant/vue': link:../vue
+      '@zoom-avant/vue': 0.6.0
     devDependencies:
       '@nuxt/module-builder': 0.2.0
       '@nuxt/schema': 3.0.0-rc.13
@@ -77,9 +77,6 @@ packages:
     peerDependencies:
       '@algolia/client-search': '>= 4.9.1 < 6'
       algoliasearch: '>= 4.9.1 < 6'
-    peerDependenciesMeta:
-      '@algolia/client-search':
-        optional: true
     dependencies:
       '@algolia/autocomplete-shared': 1.7.2
       algoliasearch: 4.14.2
@@ -1540,6 +1537,13 @@ packages:
   /@zhead/schema/0.9.9:
     resolution: {integrity: sha512-B/No5zsZB1gz6BT7OKcD0rbyZCGoF6ImeQm2ffupQrgUpYAIv/LGtn3RVNSOcX2R2DB4g79UtuIwK0OxugFjJQ==}
     dev: true
+
+  /@zoom-avant/vue/0.6.0:
+    resolution: {integrity: sha512-58B47+0051mnqwclSqhODfBmstYP6o/svXOmtt+BPECySiVquWlS0wt1O5phQQXcStmaJnI9bQ6THMMgXlHjpQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      vue: 3.2.43
+    dev: false
 
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}

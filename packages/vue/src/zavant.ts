@@ -47,8 +47,8 @@ export default class ZAvantProvider {
   ) {
     this.options = options
     this._path = ref([])
-    this._tree = ref<ZAvantTree | null>(null)
-    this._currentEl = ref<HTMLUListElement | null>(null)
+    this._tree = ref(null)
+    this._currentEl = ref(null)
     this._height = ref(0)
     this._level = computed(() => this.path.length)
     this._rootEl = null

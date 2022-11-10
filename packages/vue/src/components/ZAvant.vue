@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, provide, onBeforeUnmount } from 'vue'
+import { onMounted, ref, provide, onBeforeUnmount, Ref } from 'vue'
 import ZAvantProvider from '@/zavant'
 
 const props = withDefaults(
@@ -15,7 +15,7 @@ const props = withDefaults(
 const ZAvant = new ZAvantProvider(props)
 provide('ZAvant', ZAvant)
 
-const root = ref<HTMLDivElement | null>(null)
+const root: Ref<HTMLDivElement | null> = ref(null)
 onMounted(() => {
   ZAvant.init(root)
 })

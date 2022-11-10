@@ -27,12 +27,5 @@
     "prettier": "^2.7.1",
     "vitest": "^0.25.1",
     "vue": "^3.2.43"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search"
-      ]
-    }
   }
 }

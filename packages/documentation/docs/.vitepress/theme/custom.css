@@ -28,7 +28,7 @@
 .dark body {
   /*Body*/
   --vp-c-bg: #000000;
-  --vp-c-bg-alt: #0c0c0c;
+  --vp-c-bg-alt: #060606;
 }
 
 .dark .VPNav.no-sidebar {

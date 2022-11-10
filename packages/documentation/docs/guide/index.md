@@ -38,12 +38,12 @@ pnpm add -D @zoom-avant/vue
 
 ```vue
 <script setup lang="ts">
-import { ZAvant, ZAvantMenu, ZAvantMenuItem } from '@zoom-avant/vue'
+import { ZAvant, ZAvantMenu, ZAvantItem } from '@zoom-avant/vue'
 import '@zoom-avant/vue/css'
 </script>
 ```
 
-3. That's it, see the [structure](/guide/structure) page to continue your journey.
+3. That's it, see the [usage](/guide/usage) page to continue your journey.
 
 or
 
@@ -82,7 +82,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. That's it, see the [structure](/guide/structure) page to continue your adventure.<br/>After that, don't forget to consult [Nuxt](/guide/nuxt) page which details the module.
+3. That's it, see the [usage](/guide/usage) page to continue your adventure.<br/>After that, don't forget to consult [Nuxt](/guide/nuxt) page which details the module.
 
 ## Credits
 

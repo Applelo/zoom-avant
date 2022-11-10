@@ -26,7 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     // prettier-ignore
-    ['ZAvant', 'ZAvantMenu', 'ZAvantMenuItem'].forEach(comp => {
+    ['ZAvant', 'ZAvantMenu', 'ZAvantItem'].forEach(comp => {
       addComponent({
         name: comp,
         filePath: '@zoom-avant/vue',

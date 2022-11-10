@@ -10,13 +10,19 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Applelo/zoom-avant' }
     ],
+    // TODO: After docs publish, apply for https://docsearch.algolia.com/
+    // algolia: {
+    //   indexName: 'zavant',
+    //   appId: '',
+    //   apiKey: ''
+    // },
     sidebar: {
       '/guide/': [
         {
           text: 'Introduction',
           items: [
             { text: 'Getting started', link: '/guide/' },
-            { text: 'Structure', link: '/guide/structure' },
+            { text: 'Usage', link: '/guide/usage' },
             { text: 'Components', link: '/guide/components' },
             { text: 'Styles', link: '/guide/styles' },
             { text: 'Nuxt', link: '/guide/nuxt' },

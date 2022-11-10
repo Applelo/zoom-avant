@@ -1,37 +1,37 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent } from 'vue'
 import { render, fireEvent } from '@testing-library/vue'
-import { plugin } from '..'
+import { ZAvantPlugin } from '..'
 
 describe('methods', () => {
   const Root = defineComponent({
     template: `
     <ZAvant>
-      <ZAvantMenuItem>
+      <ZAvantItem>
         <ZAvantMenu next="go-level-1">
-          <ZAvantMenuItem>1</ZAvantMenuItem>
-          <ZAvantMenuItem>2</ZAvantMenuItem>
-          <ZAvantMenuItem>
+          <ZAvantItem>1</ZAvantItem>
+          <ZAvantItem>2</ZAvantItem>
+          <ZAvantItem>
             <ZAvantMenu next="go-level-2">
-              <ZAvantMenuItem>
+              <ZAvantItem>
                 1
-              </ZAvantMenuItem>
-              <ZAvantMenuItem>
+              </ZAvantItem>
+              <ZAvantItem>
                 2
-              </ZAvantMenuItem>
+              </ZAvantItem>
             </ZAvantMenu>
-          </ZAvantMenuItem>
+          </ZAvantItem>
         </ZAvantMenu>
-      </ZAvantMenuItem>
-      <ZAvantMenuItem>
+      </ZAvantItem>
+      <ZAvantItem>
         1
-      </ZAvantMenuItem>
+      </ZAvantItem>
     </ZAvant>`
   })
 
   const { getByText, getAllByText } = render(Root, {
     global: {
-      plugins: [plugin]
+      plugins: [ZAvantPlugin]
     }
   })
 

@@ -96,13 +96,13 @@ Set the button back inner HTML. It will override the back global options and bac
 
 :::
 
-## ZAvantMenuItem
+## ZAvantItem
 
 Nothing special here, just a component to generate the `<li class="zavant__item"></li>` element.
 
 ```vue-html
-<ZAvantMenuItem>
+<ZAvantItem>
   Hello
   <span>World</span>
-</ZAvantMenuItem>
+</ZAvantItem>
 ```
