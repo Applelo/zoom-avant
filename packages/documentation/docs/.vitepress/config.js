@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Zoom Avant',
   description: 'A drilldown component for VueJS',
+  base: process.env.NODE_ENV === 'development' ? undefined : '/zoom-avant/',
   themeConfig: {
     footer: {
       message: 'Released under the GPL3 License.'
