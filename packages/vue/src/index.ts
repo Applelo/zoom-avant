@@ -7,7 +7,7 @@ import ZAvant from './components/ZAvant.vue'
 import ZAvantMenu from './components/ZAvantMenu.vue'
 import ZAvantMenuItem from './components/ZAvantMenuItem.vue'
 
-const plugin = {
+const ZAvantPlugin = {
   install(app: App) {
     app.component('ZAvant', ZAvant)
     app.component('ZAvantMenu', ZAvantMenu)
@@ -16,4 +16,4 @@ const plugin = {
 }
 
 export { ZAvant, ZAvantMenu, ZAvantMenuItem }
-export { plugin }
+export { ZAvantPlugin }

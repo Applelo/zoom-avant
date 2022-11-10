@@ -2,6 +2,8 @@
 
 **Zoom Avant** respect the [BEM](https://getbem.com/) methodology.
 
+This is all the styles available with **ZoomAvant**
+
 - `@zoom-avant/vue/css`: all styles below compiled in one file
 - `@zoom-avant/vue/css/base`: the base of ZoomAvant to make it work
 - `@zoom-avant/vue/css/animation`: animation on drill and on height change

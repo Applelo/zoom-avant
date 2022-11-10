@@ -64,8 +64,37 @@ Default: `Back`
 
 **Slots**
 
-- `next`
-- `back`
+::: details **next**
+Set the button next inner HTML. It will override the next props for this item.
+
+```vue-html
+<ZAvantMenu>
+  <template #next>
+    Next <span>➡️</span>
+  </template>
+  <template #default>
+    <!--My menu items-->
+  </template>
+</ZAvantMenu>
+```
+
+:::
+
+::: details **back**
+Set the button back inner HTML. It will override the back global options and back props for this item.
+
+```vue-html
+<ZAvantMenu>
+  <template #back>
+    <span>⬅️</span> Back
+  </template>
+  <template #default>
+    <!--My menu items-->
+  </template>
+</ZAvantMenu>
+```
+
+:::
 
 ## ZAvantMenuItem
 

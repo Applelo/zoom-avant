@@ -1,6 +1,6 @@
 # Nuxt
 
-**Zoom Avant** has a Nuxt integration, allowing you to load automatically [styles](/guide/styles) and components for quick and fast integration in your web apps/sites.
+**Zoom Avant** has an integration for Nuxt 3, allowing you to load automatically [styles](/guide/styles) and components for quick and fast integration in your web apps/sites.
 
 ## Installation
 
@@ -22,7 +22,7 @@ You can customize the styles Nuxt will load for you in the `zavant` object.
 export default defineNuxtConfig({
   modules: ['@zoom-avant/nuxt'],
   zavant: {
-    styles: ['base']
+    styles: ['base', 'animation']
   }
 })
 ```

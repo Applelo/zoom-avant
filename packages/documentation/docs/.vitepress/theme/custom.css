@@ -2,7 +2,7 @@
 :root {
   --main-color: #4831d4;
   --light-color: #604ed4;
-  --highlight-color: #ccf381;
+  --highlight-color: #95e205;
 
   --vp-c-brand: var(--main-color);
   --vp-c-brand-light: var(--light-color);
@@ -27,10 +27,14 @@
 
 .dark body {
   /*Body*/
-  --vp-c-bg: #1c1c1c;
-  --vp-c-bg-alt: #2a2929;
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: #0c0c0c;
 }
 
 .dark .VPNav.no-sidebar {
   background-color: transparent !important;
+}
+
+.dark .VPNavBar.has-sidebar.has-sidebar .content {
+  background: rgba(0, 0, 0, 0.7);
 }

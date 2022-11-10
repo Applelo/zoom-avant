@@ -48,7 +48,7 @@ import '@zoom-avant/vue/css'
 or
 
 ```ts
-import { plugin as ZAvantPlugin } from '@zoom-avant/vue'
+import { ZAvantPlugin } from '@zoom-avant/vue'
 import { createApp } from 'vue'
 
 const app = createApp({})
