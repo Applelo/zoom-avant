@@ -30,35 +30,37 @@ This example cover the basic of **Zoom Avant**. The [ZAvant](/guide/components.h
 
 ## Advanced
 
+This exemple is more complexe using props and slots. You can check the [components](/guide/components) page for more information.
+
 ```vue-html
 <template>
   <ZAvant :dynamic-height="true">
     <ZAvantItem>
-      <ZAvantMenu next="Next 1">
-        <ZAvantItem>Hello</ZAvantItem>
-        <ZAvantItem>world</ZAvantItem>
-        <ZAvantItem>Bonjour</ZAvantItem>
+      <ZAvantMenu next="Item 0 1">
+        <ZAvantItem>Item 1 1</ZAvantItem>
+        <ZAvantItem>Item 1 2</ZAvantItem>
+        <ZAvantItem>Item 1 3</ZAvantItem>
       </ZAvantMenu>
     </ZAvantItem>
     <ZAvantItem>
-      <ZAvantMenu next="Next 2" back="Back 2">
-        <ZAvantItem>Cheese</ZAvantItem>
-        <ZAvantItem>Fromage</ZAvantItem>
-        <ZAvantItem>Brie</ZAvantItem>
+      <ZAvantMenu next="Item 0 2" back="Back to root">
+        <ZAvantItem>Item 2 1</ZAvantItem>
+        <ZAvantItem>Item 2 2</ZAvantItem>
+        <ZAvantItem>Item 2 2</ZAvantItem>
         <ZAvantItem>
           <ZAvantMenu>
             <template #next>
-              <span>Bonjour le monde</span>
+              <span>Item 2 3</span>
             </template>
             <template #back>
-              <span>Retour</span>
+              <span>Back to 1</span>
             </template>
             <template #default>
               <ZAvantItem>
-                <a href="#">Hello</a>
+                <a href="#">Item 2 4</a>
               </ZAvantItem>
               <ZAvantItem>
-                <a href="#">world</a>
+                <a href="#">Item 2 5</a>
               </ZAvantItem>
             </template>
           </ZAvantMenu>
@@ -66,10 +68,8 @@ This example cover the basic of **Zoom Avant**. The [ZAvant](/guide/components.h
       </ZAvantMenu>
     </ZAvantItem>
     <ZAvantItem>
-      <a href="#">Bonjour le monde</a>
+      <a href="#">Item 0 3</a>
     </ZAvantItem>
   </ZAvant>
 </template>
 ```
-
-For more about options (props and slots) available, you can check the [components](/guide/components) page.
