@@ -1,10 +1,14 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { ZAvant, ZAvantMenu, ZAvantItem } from '../..'
+
+const model = ref<string[]>([])
 </script>
 
 <template>
   <div>
-    <ZAvant :dynamic-height="true">
+    <p>Model : {{ model.join(' | ') }}</p>
+    <ZAvant :dynamic-height="true" v-model="model">
       <ZAvantItem>
         <ZAvantMenu next="Item 0 1">
           <ZAvantItem>Item 1 1</ZAvantItem>
@@ -41,5 +45,11 @@ import { ZAvant, ZAvantMenu, ZAvantItem } from '../..'
         <a href="#">Item 0 3</a>
       </ZAvantItem>
     </ZAvant>
+    <button style="display: block" @click="model = ['1', '0']">
+      Go to target element
+    </button>
+    <button style="display: block" @click="model.pop()">
+      Outside back button
+    </button>
   </div>
 </template>

@@ -43,10 +43,11 @@ export default class ZAvantProvider {
     options: Readonly<{
       dynamicHeight?: boolean | undefined
       back?: string | undefined
-    }>
+    }>,
+    path: Ref<string[]>
   ) {
     this.options = options
-    this.path = ref([])
+    this.path = path
     this._tree = ref(null)
     this._currentEl = ref(null)
     this._height = ref(0)
