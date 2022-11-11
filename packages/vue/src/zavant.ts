@@ -21,7 +21,7 @@ export default class ZAvantProvider {
     back?: string | undefined
   }>
 
-  private _path: Ref<string[]>
+  public path: Ref<string[]>
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
@@ -46,11 +46,11 @@ export default class ZAvantProvider {
     }>
   ) {
     this.options = options
-    this._path = ref([])
+    this.path = ref([])
     this._tree = ref(null)
     this._currentEl = ref(null)
     this._height = ref(0)
-    this._level = computed(() => this.path.length)
+    this._level = computed(() => this.path.value.length)
     this._rootEl = null
     this._wrapperEl = null
 
@@ -312,9 +312,10 @@ export default class ZAvantProvider {
 
   private treePath() {
     const arr: string[] = []
+    const unrefPath = unref(this.path)
 
-    for (let index = 0; index < this.path.length; index++) {
-      const item = this.path[index]
+    for (let index = 0; index < unrefPath.length; index++) {
+      const item = unrefPath[index]
       arr.push('children')
       arr.push(item)
     }
@@ -345,7 +346,7 @@ export default class ZAvantProvider {
     const index = children.findIndex(item => menu === item.el)
     if (index === -1) return
 
-    this.path.push(index.toString())
+    this.path.value.push(index.toString())
     this.currentEl = children[index].el
     this.updateFocusableElements()
 
@@ -360,7 +361,7 @@ export default class ZAvantProvider {
       | HTMLButtonElement
       | undefined
 
-    this.path.pop()
+    this.path.value.pop()
     const item: ZAvantTree['el'] = this.level
       ? get(this.tree, this.treePath()).el
       : this.tree.el
@@ -374,14 +375,6 @@ export default class ZAvantProvider {
       nextButton.setAttribute('aria-expanded', 'false')
       nextButton.focus()
     }
-  }
-
-  private set path(path) {
-    this._path.value = path
-  }
-
-  private get path() {
-    return unref(this._path)
   }
 
   private set tree(tree) {

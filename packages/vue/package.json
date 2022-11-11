@@ -37,7 +37,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "vue": "^3.2.43"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@types/lodash.get": "^4.4.7",
