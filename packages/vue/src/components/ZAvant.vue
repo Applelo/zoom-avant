@@ -13,15 +13,17 @@ const props = withDefaults(
     back: 'Back'
   }
 )
+
 const emit = defineEmits(['update:modelValue'])
 const path = computed({
   get() {
-    return props.modelValue ? props.modelValue : []
+    return props.modelValue ? props.modelValue : ref([]).value
   },
   set(value) {
-    emit('update:modelValue', value ? value : [])
+    emit('update:modelValue', value ? value : ref([]).value)
   }
 })
+
 const ZAvant = new ZAvantProvider(props, path)
 provide('ZAvant', ZAvant)
 
