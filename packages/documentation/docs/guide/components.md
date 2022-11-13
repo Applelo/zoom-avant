@@ -34,6 +34,20 @@ Default: `Back`
 
 :::
 
+::: details **v-model**
+The path of the tree.
+
+For example `['1', '0']` will show the first menu inside the second menu.
+
+Type: `string[]`<br/>
+Default: `[]`
+
+```vue-html
+<ZAvant v-model="['1']"></ZAvant>
+```
+
+:::
+
 ## ZAvantMenu
 
 **Props**

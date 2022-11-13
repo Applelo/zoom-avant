@@ -73,3 +73,64 @@ This exemple is more complexe using props and slots. You can check the [componen
   </ZAvant>
 </template>
 ```
+
+## Control programatically
+
+You can control the Drilldown programatically with the `v-model` property. You need to pass an array with or without string number values.
+
+With this, you can reset the drilldown, start the drilldown at an another place or make a global back button outside the component.
+
+```vue-html
+<script lang="ts" setup>
+const model = ref<string[]>([])
+</script>
+
+<template>
+  <div>
+    <p>Model : {{ model.join(' | ') }}</p>
+    <ZAvant :dynamic-height="true" v-model="model">
+      <ZAvantItem>
+        <ZAvantMenu next="Item 0 1">
+          <ZAvantItem>Item 1 1</ZAvantItem>
+          <ZAvantItem>Item 1 2</ZAvantItem>
+          <ZAvantItem>Item 1 3</ZAvantItem>
+        </ZAvantMenu>
+      </ZAvantItem>
+      <ZAvantItem>
+        <ZAvantMenu next="Item 0 2" back="Back to root">
+          <ZAvantItem>Item 2 1</ZAvantItem>
+          <ZAvantItem>Item 2 2</ZAvantItem>
+          <ZAvantItem>Item 2 2</ZAvantItem>
+          <ZAvantItem>
+            <ZAvantMenu>
+              <template #next>
+                <span>Item 2 3</span>
+              </template>
+              <template #back>
+                <span>Back to 1</span>
+              </template>
+              <template #default>
+                <ZAvantItem>
+                  <a href="#">Item 2 4</a>
+                </ZAvantItem>
+                <ZAvantItem>
+                  <a href="#">Item 2 5</a>
+                </ZAvantItem>
+              </template>
+            </ZAvantMenu>
+          </ZAvantItem>
+        </ZAvantMenu>
+      </ZAvantItem>
+      <ZAvantItem>
+        <a href="#">Item 0 3</a>
+      </ZAvantItem>
+    </ZAvant>
+    <button style="display: block" @click="model = ['1', '0']">
+      Go to target element
+    </button>
+    <button style="display: block" @click="model.pop()">
+      Outside back button
+    </button>
+  </div>
+</template>
+```
