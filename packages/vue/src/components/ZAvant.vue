@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref, provide, onBeforeUnmount, Ref, computed } from 'vue'
-import ZAvantProvider from './../zavant'
+import ZAvantMain from './../zavant'
 
 const props = withDefaults(
   defineProps<{
@@ -17,14 +17,14 @@ const props = withDefaults(
 const emit = defineEmits(['update:modelValue'])
 const path = computed({
   get() {
-    return props.modelValue ? props.modelValue : []
+    return props.modelValue ? props.modelValue : ref<string[]>([]).value
   },
   set(value) {
-    emit('update:modelValue', value ? value : [])
+    emit('update:modelValue', value ? value : ref<string[]>([]).value)
   }
 })
 
-const ZAvant = new ZAvantProvider(props, path)
+const ZAvant = new ZAvantMain(props, path)
 provide('ZAvant', ZAvant)
 
 const root: Ref<HTMLDivElement | null> = ref(null)

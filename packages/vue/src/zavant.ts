@@ -16,7 +16,7 @@ interface ZAvantTree {
   children: ZAvantTree[]
 }
 
-export default class ZAvantProvider {
+export default class ZAvantMain {
   public options: Readonly<{
     dynamicHeight?: boolean | undefined
     back?: string | undefined
