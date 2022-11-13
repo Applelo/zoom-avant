@@ -6,7 +6,8 @@ import {
   ComputedRef,
   StyleValue,
   watch,
-  WatchStopHandle
+  WatchStopHandle,
+  WritableComputedRef
 } from 'vue'
 import get from 'lodash.get'
 
@@ -21,7 +22,7 @@ export default class ZAvantProvider {
     back?: string | undefined
   }>
 
-  public path: Ref<string[]>
+  public path: WritableComputedRef<string[]>
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
@@ -35,6 +36,7 @@ export default class ZAvantProvider {
   private _resizeObserver: ResizeObserver | null
   private _mutationObserver: MutationObserver | null
   private _unwatchCurrentEl: WatchStopHandle
+  private _unwatchPath: WatchStopHandle
 
   private readonly focusEls =
     '*:is(button, a, input, select, textarea, [tabindex]):not([tabindex="-1"])'
@@ -44,7 +46,7 @@ export default class ZAvantProvider {
       dynamicHeight?: boolean | undefined
       back?: string | undefined
     }>,
-    path: Ref<string[]>
+    path: WritableComputedRef<string[]>
   ) {
     this.options = options
     this.path = path
@@ -61,6 +63,16 @@ export default class ZAvantProvider {
     this._unwatchCurrentEl = watch(this._currentEl, () => {
       this.getHeightWithOptions()
     })
+
+    this._unwatchPath = watch(
+      this.path,
+      () => {
+        this.updateWithPath()
+      },
+      {
+        deep: true
+      }
+    )
 
     this._rootClass = computed(() => {
       const classes = [`zavant--level-${this.level}`]
@@ -167,6 +179,7 @@ export default class ZAvantProvider {
     if (this._resizeObserver) this._resizeObserver.disconnect()
     if (this._mutationObserver) this._mutationObserver.disconnect()
     this._unwatchCurrentEl()
+    this._unwatchPath()
   }
 
   private update() {
@@ -311,17 +324,46 @@ export default class ZAvantProvider {
     this.height = height
   }
 
-  private treePath() {
+  private treePath(path = unref(this.path)) {
     const arr: string[] = []
-    const unrefPath = unref(this.path)
 
-    for (let index = 0; index < unrefPath.length; index++) {
-      const item = unrefPath[index]
+    for (let index = 0; index < path.length; index++) {
+      const item = path[index]
       arr.push('children')
       arr.push(item)
     }
 
     return arr
+  }
+
+  public updateWithPath() {
+    if (!this.tree) return
+
+    const currentEl: ZAvantTree['el'] = this.level
+      ? get(this.tree, this.treePath()).el
+      : this.tree.el
+
+    const nexts = Array.from(document.getElementsByClassName('zavant__next'))
+    nexts.forEach(next => next.setAttribute('aria-expanded', 'false'))
+    const unrefPath = unref(this.path)
+    const route: string[] = []
+    for (let index = 0; index < unrefPath.length; index++) {
+      const item = unrefPath[index]
+      route.push(item)
+      const el: ZAvantTree['el'] = this.level
+        ? get(this.tree, this.treePath(route)).el
+        : this.tree.el
+      const next = el.previousElementSibling
+      if (!next) continue
+
+      next.setAttribute('aria-expanded', 'true')
+    }
+
+    this.currentEl = currentEl
+    this.updateFocusableElements()
+
+    this.currentEl?.focus()
+    this.focusFirst()
   }
 
   public next(e: Event | HTMLElement) {
@@ -336,8 +378,6 @@ export default class ZAvantProvider {
       target.tagName === 'BUTTON' ? target : target.closest('button')
     if (!button) return
 
-    button.setAttribute('aria-expanded', 'true')
-
     const menu = button.nextElementSibling
     if (!menu) return
 
@@ -347,35 +387,19 @@ export default class ZAvantProvider {
     const index = children.findIndex(item => menu === item.el)
     if (index === -1) return
 
-    this.path.value.push(index.toString())
-    this.currentEl = children[index].el
-    this.updateFocusableElements()
+    const path = this.path.value
+    path.push(index.toString())
 
-    this.currentEl?.focus()
-    this.focusFirst()
+    this.path.value = path
   }
 
   public back() {
     if (!this.tree || unref(this.level) === 0) return
 
-    const nextButton = this.currentEl?.previousElementSibling as
-      | HTMLButtonElement
-      | undefined
+    const path = this.path.value
+    path.pop()
 
-    this.path.value.pop()
-    const item: ZAvantTree['el'] = this.level
-      ? get(this.tree, this.treePath()).el
-      : this.tree.el
-
-    this.currentEl = item
-    this.updateFocusableElements()
-
-    this.currentEl?.focus()
-
-    if (nextButton) {
-      nextButton.setAttribute('aria-expanded', 'false')
-      nextButton.focus()
-    }
+    this.path.value = path
   }
 
   private set tree(tree) {
