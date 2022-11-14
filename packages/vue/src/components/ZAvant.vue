@@ -6,7 +6,7 @@ const props = withDefaults(
   defineProps<{
     dynamicHeight?: boolean
     back?: string
-    modelValue?: string[]
+    modelValue?: number[]
   }>(),
   {
     dynamicHeight: false,
@@ -17,10 +17,10 @@ const props = withDefaults(
 const emit = defineEmits(['update:modelValue'])
 const path = computed({
   get() {
-    return props.modelValue ? props.modelValue : ref<string[]>([]).value
+    return props.modelValue ? props.modelValue : ref<number[]>([]).value
   },
   set(value) {
-    emit('update:modelValue', value ? value : ref<string[]>([]).value)
+    emit('update:modelValue', value ? value : ref<number[]>([]).value)
   }
 })
 

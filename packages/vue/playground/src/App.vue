@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { ZAvant, ZAvantMenu, ZAvantItem } from '../..'
 
-const model = ref<string[]>([])
+const model = ref<number[]>([])
 </script>
 
 <template>
@@ -10,14 +10,14 @@ const model = ref<string[]>([])
     <p>Model : {{ model.join(' | ') }}</p>
     <ZAvant :dynamic-height="true" v-model="model">
       <ZAvantItem>
-        <ZAvantMenu next="Item 0 1">
+        <ZAvantMenu next="Item 1">
           <ZAvantItem>Item 1 1</ZAvantItem>
           <ZAvantItem>Item 1 2</ZAvantItem>
           <ZAvantItem>Item 1 3</ZAvantItem>
         </ZAvantMenu>
       </ZAvantItem>
       <ZAvantItem>
-        <ZAvantMenu next="Item 0 2" back="Back to root">
+        <ZAvantMenu next="Item 2" back="Back to root">
           <ZAvantItem>Item 2 1</ZAvantItem>
           <ZAvantItem>Item 2 2</ZAvantItem>
           <ZAvantItem>Item 2 2</ZAvantItem>
@@ -42,10 +42,10 @@ const model = ref<string[]>([])
         </ZAvantMenu>
       </ZAvantItem>
       <ZAvantItem>
-        <a href="#">Item 0 3</a>
+        <a href="#">Item 3</a>
       </ZAvantItem>
     </ZAvant>
-    <button style="display: block" @click="model = ['1', '0']">
+    <button style="display: block" @click="model = [2, 1]">
       Go to target element
     </button>
     <button style="display: block" @click="model.pop()">

@@ -22,7 +22,7 @@ export default class ZAvantMain {
     back?: string | undefined
   }>
 
-  public path: WritableComputedRef<string[]>
+  public path: WritableComputedRef<number[]>
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
@@ -46,7 +46,7 @@ export default class ZAvantMain {
       dynamicHeight?: boolean | undefined
       back?: string | undefined
     }>,
-    path: WritableComputedRef<string[]>
+    path: WritableComputedRef<number[]>
   ) {
     this.options = options
     this.path = path
@@ -328,9 +328,9 @@ export default class ZAvantMain {
     const arr: string[] = []
 
     for (let index = 0; index < path.length; index++) {
-      const item = path[index]
+      const item = path[index] - 1
       arr.push('children')
-      arr.push(item)
+      arr.push(item.toString())
     }
 
     return arr
@@ -346,7 +346,8 @@ export default class ZAvantMain {
     const nexts = Array.from(document.getElementsByClassName('zavant__next'))
     nexts.forEach(next => next.setAttribute('aria-expanded', 'false'))
     const unrefPath = unref(this.path)
-    const route: string[] = []
+    const route: number[] = []
+
     for (let index = 0; index < unrefPath.length; index++) {
       const item = unrefPath[index]
       route.push(item)
@@ -388,7 +389,7 @@ export default class ZAvantMain {
     if (index === -1) return
 
     const path = this.path.value
-    path.push(index.toString())
+    path.push(index + 1)
 
     this.path.value = path
   }
