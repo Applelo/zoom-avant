@@ -35,31 +35,25 @@ describe('methods', () => {
     }
   })
 
-  let level1HTML: string = '',
-    rootHTML: string = ''
-
   it('next', async () => {
-    rootHTML = wrapper.html()
     const nexts = wrapper.findAll('button.zavant__next')
     expect(nexts.length).toBe(2)
 
     await nexts[0].trigger('click')
-    level1HTML = wrapper.html()
-    expect(level1HTML).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
 
     await nexts[1].trigger('click')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  //TODO: Fix this test
-  it.skip('back', async () => {
+  it('back', async () => {
     const backs = wrapper.findAll('button.zavant__back')
     expect(backs.length).toBe(2)
 
     await backs[1].trigger('click')
-    expect(wrapper.html()).toBe(level1HTML)
+    expect(wrapper.html()).toMatchSnapshot()
 
     await backs[0].trigger('click')
-    expect(wrapper.html()).toBe(rootHTML)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
