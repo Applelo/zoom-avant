@@ -103,6 +103,7 @@ export default class ZAvantMain {
     this.currentEl = this._wrapperEl
 
     this.update()
+    this.updateWithPath(true)
 
     if (
       typeof ResizeObserver !== 'undefined' &&
@@ -192,7 +193,6 @@ export default class ZAvantMain {
 
     this.tree = data
     this.getHeightWithOptions()
-    this.updateFocusableElements()
   }
 
   private updateFocusableElements() {
@@ -336,7 +336,7 @@ export default class ZAvantMain {
     return arr
   }
 
-  public updateWithPath() {
+  public updateWithPath(init = false) {
     if (!this.tree) return
 
     const currentEl: ZAvantTree['el'] = this.level
@@ -363,8 +363,10 @@ export default class ZAvantMain {
     this.currentEl = currentEl
     this.updateFocusableElements()
 
-    this.currentEl?.focus()
-    this.focusFirst()
+    if (!init) {
+      this.currentEl?.focus()
+      this.focusFirst()
+    }
   }
 
   public next(e: Event | HTMLElement) {

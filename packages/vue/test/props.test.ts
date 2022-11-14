@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent } from 'vue'
-import { render } from '@testing-library/vue'
+import { mount } from '@vue/test-utils'
 import { ZAvantPlugin } from '..'
 
 describe('props root', () => {
@@ -29,25 +29,22 @@ describe('props root', () => {
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
       plugins: [ZAvantPlugin]
     }
   })
-  const zavantRoot = document.querySelector<HTMLElement>('.zavant')
 
   it('global back', () => {
-    expect(zavantRoot?.querySelectorAll('.zavant__back').length).toBe(2)
+    expect(wrapper.findAll('.zavant__back').length).toBe(2)
   })
 
   it('dynamicHeight', () => {
-    expect(
-      zavantRoot?.classList.contains('zavant--dynamic-height')
-    ).toBeTruthy()
+    expect(wrapper.find('.zavant--dynamic-height')).not.toBeNull()
   })
 })
 
-describe('props root', () => {
+describe('props menu', () => {
   const Root = defineComponent({
     template: `
     <ZAvant>
@@ -64,14 +61,13 @@ describe('props root', () => {
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
       plugins: [ZAvantPlugin]
     }
   })
-  const zavantRoot = document.querySelector<HTMLElement>('.zavant')
 
   it('next and back', () => {
-    expect(zavantRoot?.outerHTML).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

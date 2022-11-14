@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { ZAvant, ZAvantMenu, ZAvantItem } from '../..'
 
-const model = ref<number[]>([])
+const model = ref<number[]>([2, 1])
 </script>
 
 <template>

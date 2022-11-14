@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent } from 'vue'
-import { render } from '@testing-library/vue'
+import { mount } from '@vue/test-utils'
 import { ZAvantPlugin } from '..'
 
 describe('slots', () => {
@@ -31,15 +31,13 @@ describe('slots', () => {
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
       plugins: [ZAvantPlugin]
     }
   })
 
-  const zavantRoot = document.querySelector('.zavant')
-
   it('all', async () => {
-    expect(zavantRoot?.outerHTML).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

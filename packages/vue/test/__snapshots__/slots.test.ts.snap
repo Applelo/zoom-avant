@@ -1,3 +1,16 @@
 // Vitest Snapshot v1
 
-exports[`slots > all 1`] = `"<nav class=\\"zavant zavant--level-0\\"><ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(0%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\"><li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" aria-controls=\\"zavant-menu-4\\"><span>Suivant</span></button><ul id=\\"zavant-menu-4\\" class=\\"zavant__menu\\" role=\\"menu\\"><li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\"><span>Retour</span></button></li><li class=\\"zavant__item\\" role=\\"none\\"> 1 </li><li class=\\"zavant__item\\" role=\\"none\\"> 2 </li><li class=\\"zavant__item\\" role=\\"none\\"> 3 </li></ul></li></ul></nav>"`;
+exports[`slots > all 1`] = `
+"<nav class=\\"zavant zavant--level-0\\">
+  <ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(0%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\">
+    <li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" aria-controls=\\"zavant-menu-4\\"><span>Suivant</span></button>
+      <ul id=\\"zavant-menu-4\\" class=\\"zavant__menu\\" role=\\"menu\\">
+        <li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\"><span>Retour</span></button></li>
+        <li class=\\"zavant__item\\" role=\\"none\\"> 1 </li>
+        <li class=\\"zavant__item\\" role=\\"none\\"> 2 </li>
+        <li class=\\"zavant__item\\" role=\\"none\\"> 3 </li>
+      </ul>
+    </li>
+  </ul>
+</nav>"
+`;
