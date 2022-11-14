@@ -25,8 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.css.push('@zoom-avant/vue/css')
     }
 
-    // prettier-ignore
-    ['ZAvant', 'ZAvantMenu', 'ZAvantMenuItem'].forEach(comp => {
+    ;['ZAvant', 'ZAvantMenu', 'ZAvantItem'].forEach(comp => {
       addComponent({
         name: comp,
         filePath: '@zoom-avant/vue',

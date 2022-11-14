@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent } from 'vue'
-import { render } from '@testing-library/vue'
-import { plugin } from '..'
+import { mount } from '@vue/test-utils'
+import { ZAvantPlugin } from '..'
 
 describe('slots', () => {
   const Root = defineComponent({
     template: `
     <ZAvant>
-      <ZAvantMenuItem>
+      <ZAvantItem>
         <ZAvantMenu>
           <template #next>
             <span>Suivant</span>
@@ -16,30 +16,28 @@ describe('slots', () => {
             <span>Retour</span>
           </template>
           <template #default>
-            <ZAvantMenuItem>
+            <ZAvantItem>
               1
-            </ZAvantMenuItem>
-            <ZAvantMenuItem>
+            </ZAvantItem>
+            <ZAvantItem>
               2
-            </ZAvantMenuItem>
-            <ZAvantMenuItem>
+            </ZAvantItem>
+            <ZAvantItem>
               3
-            </ZAvantMenuItem>
+            </ZAvantItem>
           </template>
         </ZAvantMenu>
-      </ZAvantMenuItem>
+      </ZAvantItem>
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
-      plugins: [plugin]
+      plugins: [ZAvantPlugin]
     }
   })
 
-  const zavantRoot = document.querySelector('.zavant')
-
   it('all', async () => {
-    expect(zavantRoot?.outerHTML).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -1,28 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`methods > back 1`] = `
-"<nav class=\\"zavant zavant--level-1\\">
-  <ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(-100%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\" tabindex=\\"-1\\">
-    <li class=\\"zavant__item\\" role=\\"none\\" tabindex=\\"-1\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-4\\" tabindex=\\"-1\\">go-level-1</button>
-      <ul id=\\"zavant-menu-4\\" class=\\"zavant__menu\\" role=\\"menu\\">
-        <li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\">Back</button></li>
-        <li class=\\"zavant__item\\" role=\\"none\\">1</li>
-        <li class=\\"zavant__item\\" role=\\"none\\">2</li>
-        <li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-8\\">go-level-2</button>
-          <ul id=\\"zavant-menu-8\\" class=\\"zavant__menu\\" role=\\"menu\\">
-            <li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\">Back</button></li>
-            <li class=\\"zavant__item\\" role=\\"none\\"> 1 </li>
-            <li class=\\"zavant__item\\" role=\\"none\\"> 2 </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li class=\\"zavant__item\\" role=\\"none\\" tabindex=\\"-1\\"> 1 </li>
-  </ul>
-</nav>"
-`;
-
-exports[`methods > back 2`] = `
+exports[`model > go back 1`] = `
 "<nav class=\\"zavant zavant--level-0\\">
   <ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(0%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\">
     <li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-4\\">go-level-1</button>
@@ -44,7 +22,7 @@ exports[`methods > back 2`] = `
 </nav>"
 `;
 
-exports[`methods > next 1`] = `
+exports[`model > go to 1 1`] = `
 "<nav class=\\"zavant zavant--level-1\\">
   <ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(-100%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\" tabindex=\\"-1\\">
     <li class=\\"zavant__item\\" role=\\"none\\" tabindex=\\"-1\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-4\\" tabindex=\\"-1\\">go-level-1</button>
@@ -52,7 +30,7 @@ exports[`methods > next 1`] = `
         <li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\">Back</button></li>
         <li class=\\"zavant__item\\" role=\\"none\\">1</li>
         <li class=\\"zavant__item\\" role=\\"none\\">2</li>
-        <li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\" aria-controls=\\"zavant-menu-8\\">go-level-2</button>
+        <li class=\\"zavant__item\\" role=\\"none\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-8\\">go-level-2</button>
           <ul id=\\"zavant-menu-8\\" class=\\"zavant__menu\\" role=\\"menu\\">
             <li role=\\"none\\" class=\\"zavant__item zavant__item--back\\"><button class=\\"zavant__back\\" role=\\"menuitem\\">Back</button></li>
             <li class=\\"zavant__item\\" role=\\"none\\"> 1 </li>
@@ -66,7 +44,7 @@ exports[`methods > next 1`] = `
 </nav>"
 `;
 
-exports[`methods > next 2`] = `
+exports[`model > initial 1`] = `
 "<nav class=\\"zavant zavant--level-2\\">
   <ul class=\\"zavant__menu zavant__menu--wrapper\\" role=\\"menubar\\" style=\\"transform: translateX(-200%);\\" aria-multiselectable=\\"false\\" aria-orientation=\\"vertical\\" tabindex=\\"-1\\">
     <li class=\\"zavant__item\\" role=\\"none\\" tabindex=\\"-1\\"><button class=\\"zavant__next\\" role=\\"menuitem\\" aria-haspopup=\\"true\\" aria-expanded=\\"true\\" aria-controls=\\"zavant-menu-4\\" tabindex=\\"-1\\">go-level-1</button>

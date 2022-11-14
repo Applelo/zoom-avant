@@ -6,7 +6,8 @@ import {
   ComputedRef,
   StyleValue,
   watch,
-  WatchStopHandle
+  WatchStopHandle,
+  WritableComputedRef
 } from 'vue'
 import get from 'lodash.get'
 
@@ -15,13 +16,13 @@ interface ZAvantTree {
   children: ZAvantTree[]
 }
 
-export default class ZAvantProvider {
+export default class ZAvantMain {
   public options: Readonly<{
     dynamicHeight?: boolean | undefined
     back?: string | undefined
   }>
 
-  private _path: Ref<string[]>
+  public path: WritableComputedRef<number[]>
   private _tree: Ref<ZAvantTree | null>
   private _currentEl: Ref<HTMLUListElement | null>
   private _level: ComputedRef<number>
@@ -35,6 +36,7 @@ export default class ZAvantProvider {
   private _resizeObserver: ResizeObserver | null
   private _mutationObserver: MutationObserver | null
   private _unwatchCurrentEl: WatchStopHandle
+  private _unwatchPath: WatchStopHandle
 
   private readonly focusEls =
     '*:is(button, a, input, select, textarea, [tabindex]):not([tabindex="-1"])'
@@ -43,14 +45,15 @@ export default class ZAvantProvider {
     options: Readonly<{
       dynamicHeight?: boolean | undefined
       back?: string | undefined
-    }>
+    }>,
+    path: WritableComputedRef<number[]>
   ) {
     this.options = options
-    this._path = ref([])
-    this._tree = ref<ZAvantTree | null>(null)
-    this._currentEl = ref<HTMLUListElement | null>(null)
+    this.path = path
+    this._tree = ref(null)
+    this._currentEl = ref(null)
     this._height = ref(0)
-    this._level = computed(() => this.path.length)
+    this._level = computed(() => this.path.value.length)
     this._rootEl = null
     this._wrapperEl = null
 
@@ -60,6 +63,16 @@ export default class ZAvantProvider {
     this._unwatchCurrentEl = watch(this._currentEl, () => {
       this.getHeightWithOptions()
     })
+
+    this._unwatchPath = watch(
+      this.path,
+      () => {
+        this.updateWithPath()
+      },
+      {
+        deep: true
+      }
+    )
 
     this._rootClass = computed(() => {
       const classes = [`zavant--level-${this.level}`]
@@ -90,6 +103,7 @@ export default class ZAvantProvider {
     this.currentEl = this._wrapperEl
 
     this.update()
+    this.updateWithPath(true)
 
     if (
       typeof ResizeObserver !== 'undefined' &&
@@ -166,6 +180,7 @@ export default class ZAvantProvider {
     if (this._resizeObserver) this._resizeObserver.disconnect()
     if (this._mutationObserver) this._mutationObserver.disconnect()
     this._unwatchCurrentEl()
+    this._unwatchPath()
   }
 
   private update() {
@@ -178,7 +193,6 @@ export default class ZAvantProvider {
 
     this.tree = data
     this.getHeightWithOptions()
-    this.updateFocusableElements()
   }
 
   private updateFocusableElements() {
@@ -310,16 +324,49 @@ export default class ZAvantProvider {
     this.height = height
   }
 
-  private treePath() {
+  private treePath(path = unref(this.path)) {
     const arr: string[] = []
 
-    for (let index = 0; index < this.path.length; index++) {
-      const item = this.path[index]
+    for (let index = 0; index < path.length; index++) {
+      const item = path[index] - 1
       arr.push('children')
-      arr.push(item)
+      arr.push(item.toString())
     }
 
     return arr
+  }
+
+  public updateWithPath(init = false) {
+    if (!this.tree) return
+
+    const currentEl: ZAvantTree['el'] = this.level
+      ? get(this.tree, this.treePath()).el
+      : this.tree.el
+
+    const nexts = Array.from(document.getElementsByClassName('zavant__next'))
+    nexts.forEach(next => next.setAttribute('aria-expanded', 'false'))
+    const unrefPath = unref(this.path)
+    const route: number[] = []
+
+    for (let index = 0; index < unrefPath.length; index++) {
+      const item = unrefPath[index]
+      route.push(item)
+      const el: ZAvantTree['el'] = this.level
+        ? get(this.tree, this.treePath(route)).el
+        : this.tree.el
+      const next = el.previousElementSibling
+      if (!next) continue
+
+      next.setAttribute('aria-expanded', 'true')
+    }
+
+    this.currentEl = currentEl
+    this.updateFocusableElements()
+
+    if (!init) {
+      this.currentEl?.focus()
+      this.focusFirst()
+    }
   }
 
   public next(e: Event | HTMLElement) {
@@ -334,8 +381,6 @@ export default class ZAvantProvider {
       target.tagName === 'BUTTON' ? target : target.closest('button')
     if (!button) return
 
-    button.setAttribute('aria-expanded', 'true')
-
     const menu = button.nextElementSibling
     if (!menu) return
 
@@ -345,43 +390,19 @@ export default class ZAvantProvider {
     const index = children.findIndex(item => menu === item.el)
     if (index === -1) return
 
-    this.path.push(index.toString())
-    this.currentEl = children[index].el
-    this.updateFocusableElements()
+    const path = this.path.value
+    path.push(index + 1)
 
-    this.currentEl?.focus()
-    this.focusFirst()
+    this.path.value = path
   }
 
   public back() {
     if (!this.tree || unref(this.level) === 0) return
 
-    const nextButton = this.currentEl?.previousElementSibling as
-      | HTMLButtonElement
-      | undefined
+    const path = this.path.value
+    path.pop()
 
-    this.path.pop()
-    const item: ZAvantTree['el'] = this.level
-      ? get(this.tree, this.treePath()).el
-      : this.tree.el
-
-    this.currentEl = item
-    this.updateFocusableElements()
-
-    this.currentEl?.focus()
-
-    if (nextButton) {
-      nextButton.setAttribute('aria-expanded', 'false')
-      nextButton.focus()
-    }
-  }
-
-  private set path(path) {
-    this._path.value = path
-  }
-
-  private get path() {
-    return unref(this._path)
+    this.path.value = path
   }
 
   private set tree(tree) {

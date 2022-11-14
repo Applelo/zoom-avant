@@ -37,19 +37,19 @@ In your template, add the ZoomAvant structure :
 ```vue
 <template>
   <ZAvant :dynamic-height="true">
-    <ZAvantMenuItem>
+    <ZAvantItem>
       <ZAvantMenu next="Next 1">
-        <ZAvantMenuItem>Hello</ZAvantMenuItem>
-        <ZAvantMenuItem>world</ZAvantMenuItem>
-        <ZAvantMenuItem>Bonjour</ZAvantMenuItem>
+        <ZAvantItem>Hello</ZAvantItem>
+        <ZAvantItem>world</ZAvantItem>
+        <ZAvantItem>Bonjour</ZAvantItem>
       </ZAvantMenu>
-    </ZAvantMenuItem>
-    <ZAvantMenuItem>
+    </ZAvantItem>
+    <ZAvantItem>
       <ZAvantMenu next="Next 2">
-        <ZAvantMenuItem>Cheese</ZAvantMenuItem>
-        <ZAvantMenuItem>Fromage</ZAvantMenuItem>
-        <ZAvantMenuItem>Brie</ZAvantMenuItem>
-        <ZAvantMenuItem>
+        <ZAvantItem>Cheese</ZAvantItem>
+        <ZAvantItem>Fromage</ZAvantItem>
+        <ZAvantItem>Brie</ZAvantItem>
+        <ZAvantItem>
           <ZAvantMenu>
             <template #next>
               <span>Bonjour le monde</span>
@@ -58,20 +58,20 @@ In your template, add the ZoomAvant structure :
               <span>Retour</span>
             </template>
             <template #default>
-              <ZAvantMenuItem>
+              <ZAvantItem>
                 <a href="#">Hello</a>
-              </ZAvantMenuItem>
-              <ZAvantMenuItem>
+              </ZAvantItem>
+              <ZAvantItem>
                 <a href="#">world</a>
-              </ZAvantMenuItem>
+              </ZAvantItem>
             </template>
           </ZAvantMenu>
-        </ZAvantMenuItem>
+        </ZAvantItem>
       </ZAvantMenu>
-    </ZAvantMenuItem>
-    <ZAvantMenuItem>
+    </ZAvantItem>
+    <ZAvantItem>
       <a href="#">Bonjour le monde</a>
-    </ZAvantMenuItem>
+    </ZAvantItem>
   </ZAvant>
 </template>
 ```

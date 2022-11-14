@@ -1,77 +1,73 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent } from 'vue'
-import { render } from '@testing-library/vue'
-import { plugin } from '..'
+import { mount } from '@vue/test-utils'
+import { ZAvantPlugin } from '..'
 
 describe('props root', () => {
   const Root = defineComponent({
     template: `
     <ZAvant :dynamic-height="true" back="Retour">
-      <ZAvantMenuItem>
+      <ZAvantItem>
         <ZAvantMenu next="go-level-1">
-          <ZAvantMenuItem>1</ZAvantMenuItem>
-          <ZAvantMenuItem>2</ZAvantMenuItem>
-          <ZAvantMenuItem>
+          <ZAvantItem>1</ZAvantItem>
+          <ZAvantItem>2</ZAvantItem>
+          <ZAvantItem>
             <ZAvantMenu next="go-level-2">
-              <ZAvantMenuItem>
+              <ZAvantItem>
                 1
-              </ZAvantMenuItem>
-              <ZAvantMenuItem>
+              </ZAvantItem>
+              <ZAvantItem>
                 2
-              </ZAvantMenuItem>
+              </ZAvantItem>
             </ZAvantMenu>
-          </ZAvantMenuItem>
+          </ZAvantItem>
         </ZAvantMenu>
-      </ZAvantMenuItem>
-      <ZAvantMenuItem>
+      </ZAvantItem>
+      <ZAvantItem>
         1
-      </ZAvantMenuItem>
+      </ZAvantItem>
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
-      plugins: [plugin]
+      plugins: [ZAvantPlugin]
     }
   })
-  const zavantRoot = document.querySelector<HTMLElement>('.zavant')
 
   it('global back', () => {
-    expect(zavantRoot?.querySelectorAll('.zavant__back').length).toBe(2)
+    expect(wrapper.findAll('.zavant__back').length).toBe(2)
   })
 
   it('dynamicHeight', () => {
-    expect(
-      zavantRoot?.classList.contains('zavant--dynamic-height')
-    ).toBeTruthy()
+    expect(wrapper.find('.zavant--dynamic-height')).not.toBeNull()
   })
 })
 
-describe('props root', () => {
+describe('props menu', () => {
   const Root = defineComponent({
     template: `
     <ZAvant>
-      <ZAvantMenuItem>
+      <ZAvantItem>
         <ZAvantMenu next="Suivant" back="Retour">
-          <ZAvantMenuItem>
+          <ZAvantItem>
             1
-          </ZAvantMenuItem>
+          </ZAvantItem>
         </ZAvantMenu>
-      </ZAvantMenuItem>
-      <ZAvantMenuItem>
+      </ZAvantItem>
+      <ZAvantItem>
         1
-      </ZAvantMenuItem>
+      </ZAvantItem>
     </ZAvant>`
   })
 
-  render(Root, {
+  const wrapper = mount(Root, {
     global: {
-      plugins: [plugin]
+      plugins: [ZAvantPlugin]
     }
   })
-  const zavantRoot = document.querySelector<HTMLElement>('.zavant')
 
   it('next and back', () => {
-    expect(zavantRoot?.outerHTML).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

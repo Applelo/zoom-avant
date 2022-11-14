@@ -5,7 +5,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "",
   "type": "module",
   "engines": {
@@ -22,17 +22,10 @@
   "author": "",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@testing-library/vue": "^6.6.1",
-    "happy-dom": "^7.6.6",
+    "@vue/test-utils": "^2.2.2",
+    "happy-dom": "^7.7.0",
     "prettier": "^2.7.1",
-    "vitest": "^0.24.5",
-    "vue": "^3.2.41"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search"
-      ]
-    }
+    "vitest": "^0.25.2",
+    "vue": "^3.2.45"
   }
 }

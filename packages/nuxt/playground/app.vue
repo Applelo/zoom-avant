@@ -1,39 +1,39 @@
 <template>
   <ZAvant :dynamic-height="true">
-    <ZAvantMenuItem>
-      <ZAvantMenu next="Next 1">
-        <ZAvantMenuItem>Hello</ZAvantMenuItem>
-        <ZAvantMenuItem>world</ZAvantMenuItem>
-        <ZAvantMenuItem>Bonjour</ZAvantMenuItem>
+    <ZAvantItem>
+      <ZAvantMenu next="Item 0 1">
+        <ZAvantItem>Item 1 1</ZAvantItem>
+        <ZAvantItem>Item 1 2</ZAvantItem>
+        <ZAvantItem>Item 1 3</ZAvantItem>
       </ZAvantMenu>
-    </ZAvantMenuItem>
-    <ZAvantMenuItem>
-      <ZAvantMenu next="Next 2" back="Back 2">
-        <ZAvantMenuItem>Cheese</ZAvantMenuItem>
-        <ZAvantMenuItem>Fromage</ZAvantMenuItem>
-        <ZAvantMenuItem>Brie</ZAvantMenuItem>
-        <ZAvantMenuItem>
+    </ZAvantItem>
+    <ZAvantItem>
+      <ZAvantMenu next="Item 0 2" back="Back to root">
+        <ZAvantItem>Item 2 1</ZAvantItem>
+        <ZAvantItem>Item 2 2</ZAvantItem>
+        <ZAvantItem>Item 2 2</ZAvantItem>
+        <ZAvantItem>
           <ZAvantMenu>
             <template #next>
-              <span>Bonjour le monde</span>
+              <span>Item 2 3</span>
             </template>
             <template #back>
-              <span>Retour</span>
+              <span>Back to 1</span>
             </template>
             <template #default>
-              <ZAvantMenuItem>
-                <a href="#">Hello</a>
-              </ZAvantMenuItem>
-              <ZAvantMenuItem>
-                <a href="#">world</a>
-              </ZAvantMenuItem>
+              <ZAvantItem>
+                <a href="#">Item 2 4</a>
+              </ZAvantItem>
+              <ZAvantItem>
+                <a href="#">Item 2 5</a>
+              </ZAvantItem>
             </template>
           </ZAvantMenu>
-        </ZAvantMenuItem>
+        </ZAvantItem>
       </ZAvantMenu>
-    </ZAvantMenuItem>
-    <ZAvantMenuItem>
-      <a href="#">Bonjour le monde</a>
-    </ZAvantMenuItem>
+    </ZAvantItem>
+    <ZAvantItem>
+      <a href="#">Item 0 3</a>
+    </ZAvantItem>
   </ZAvant>
 </template>

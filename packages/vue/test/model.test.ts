@@ -3,10 +3,15 @@ import { defineComponent } from 'vue'
 import { mount } from '@vue/test-utils'
 import { ZAvantPlugin } from '..'
 
-describe('methods', () => {
+describe('model', () => {
   const Root = defineComponent({
+    data: () => {
+      return {
+        model: [1, 1]
+      }
+    },
     template: `
-    <ZAvant>
+    <ZAvant v-model="model">
       <ZAvantItem>
         <ZAvantMenu next="go-level-1">
           <ZAvantItem>1</ZAvantItem>
@@ -35,25 +40,17 @@ describe('methods', () => {
     }
   })
 
-  it('next', async () => {
-    const nexts = wrapper.findAll('button.zavant__next')
-    expect(nexts.length).toBe(2)
-
-    await nexts[0].trigger('click')
-    expect(wrapper.html()).toMatchSnapshot()
-
-    await nexts[1].trigger('click')
+  it('initial', async () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('back', async () => {
-    const backs = wrapper.findAll('button.zavant__back')
-    expect(backs.length).toBe(2)
-
-    await backs[1].trigger('click')
+  it('go to 1', async () => {
+    await wrapper.setData({ model: [1] })
     expect(wrapper.html()).toMatchSnapshot()
+  })
 
-    await backs[0].trigger('click')
+  it('go back', async () => {
+    await wrapper.setData({ model: [] })
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
