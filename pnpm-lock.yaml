@@ -18,12 +18,13 @@ importers:
 
   packages/documentation:
     specifiers:
-      '@zoom-avant/vue': '=>0.7.0 <1.0.0'
+      '@zoom-avant/vue': ^0.7.1
       sass: ^1.56.1
       vitepress: 1.0.0-alpha.29
       vue: ^3.2.45
-    devDependencies:
+    dependencies:
       '@zoom-avant/vue': link:../vue
+    devDependencies:
       sass: 1.56.1
       vitepress: 1.0.0-alpha.29_sass@1.56.1
       vue: 3.2.45
