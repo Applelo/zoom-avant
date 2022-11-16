@@ -18,6 +18,7 @@ export default defineConfig({
     //   appId: '',
     //   apiKey: ''
     // },
+    nav: [{ text: 'Demo', link: '/demo' }],
     sidebar: {
       '/guide/': [
         {

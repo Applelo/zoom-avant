@@ -86,6 +86,6 @@ export default defineNuxtConfig({
 
 ## Credits
 
-- Foundation Drilldown
-- Aria Pattern Menu
-- AnuVue and Pinia packages for the packages strucure
+- [Foundation Drilldown](https://get.foundation/sites/docs/drilldown-menu.html)
+- [Aria Pattern Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menu/)
+- [Anu](https://github.com/jd-solanki/anu) and [Pinia](https://github.com/vuejs/pinia) packages for the inspiration

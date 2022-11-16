@@ -38,3 +38,8 @@
 .dark .VPNavBar.has-sidebar.has-sidebar .content {
   background: rgba(0, 0, 0, 0.7);
 }
+
+.stackblitz {
+  height: 400px !important;
+  background-color: rgba(72, 49, 212, 0.25);
+}

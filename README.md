@@ -6,6 +6,12 @@
 
 > This module is not compatible with VueJS 2 and NuxtJS 2
 
+<center>
+
+👉 **[Demo](https://applelo.github.io/zoom-avant/demo.html)** 👈
+
+</center>
+
 ## Features
 
 - 🚀 Simple and efficient using modern API
@@ -38,69 +44,12 @@ yarn add -D @zoom-avant/nuxt
 pnpm add -D @zoom-avant/nuxt
 ```
 
-## Usage
+## Next
 
-For **VueJS 3**, import all the components and css styles.
+Read the **[documentation](https://applelo.github.io/zoom-avant/guide/)** 🤓
 
-```vue
-<script setup lang="ts">
-import { ZAvant, ZAvantMenu, ZAvantItem } from '@zoom-avant/vue'
-import '@zoom-avant/vue/css'
-</script>
-```
+## Credits
 
-For **Nuxt 3**, just add the `@zoom-avant/nuxt` module in your `nuxt.config.ts`.
-
-```ts
-import { defineNuxtConfig } from 'nuxt/config'
-
-export default defineNuxtConfig({
-  modules: ['@zoom-avant/nuxt']
-})
-```
-
-In your template, add the ZoomAvant structure :
-
-```vue
-<template>
-  <ZAvant :dynamic-height="true">
-    <ZAvantItem>
-      <ZAvantMenu next="Next 1">
-        <ZAvantItem>Hello</ZAvantItem>
-        <ZAvantItem>world</ZAvantItem>
-        <ZAvantItem>Bonjour</ZAvantItem>
-      </ZAvantMenu>
-    </ZAvantItem>
-    <ZAvantItem>
-      <ZAvantMenu next="Next 2" back="Next 2">
-        <ZAvantItem>Cheese</ZAvantItem>
-        <ZAvantItem>Fromage</ZAvantItem>
-        <ZAvantItem>Brie</ZAvantItem>
-        <ZAvantItem>
-          <ZAvantMenu>
-            <template #next>
-              <span>Bonjour le monde</span>
-            </template>
-            <template #back>
-              <span>Retour</span>
-            </template>
-            <template #default>
-              <ZAvantItem>
-                <a href="#">Hello</a>
-              </ZAvantItem>
-              <ZAvantItem>
-                <a href="#">world</a>
-              </ZAvantItem>
-            </template>
-          </ZAvantMenu>
-        </ZAvantItem>
-      </ZAvantMenu>
-    </ZAvantItem>
-    <ZAvantItem>
-      <a href="#">Bonjour le monde</a>
-    </ZAvantItem>
-  </ZAvant>
-</template>
-```
-
-<!-- For more information, consult the documentation. -->
+- [Foundation Drilldown](https://get.foundation/sites/docs/drilldown-menu.html)
+- [Aria Pattern Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menu/)
+- [Anu](https://github.com/jd-solanki/anu) and [Pinia](https://github.com/vuejs/pinia) packages for the inspiration
