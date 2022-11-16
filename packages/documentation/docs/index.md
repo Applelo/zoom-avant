@@ -1,5 +1,6 @@
 ---
 layout: home
+title: Home
 
 hero:
   name: Zoom Avant
@@ -11,6 +12,9 @@ hero:
     - theme: alt
       text: View on GitHub
       link: https://github.com/Applelo/zoom-avant
+    - theme: alt
+      text: Demo
+      link: /demo
 
 features:
   - icon: 🚀

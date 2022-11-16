@@ -10,7 +10,7 @@ export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: '@zoom-avant/nuxt',
     configKey: 'zavant',
-    compatibility: { nuxt: '^3.0.0-rc.13' }
+    compatibility: { nuxt: '>=3.0.0' }
   },
   defaults: {
     styles: []
