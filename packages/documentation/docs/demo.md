@@ -3,13 +3,6 @@ title: Demo
 layout: false
 ---
 
-<a href="/" class="back">Go back to the documentation</a>
-
-This is a demo of ZoomAvant with all props/slots. It uses custom [styles](/guide/styles.html) and also it is [Control programatically](/usage.html#control-programatically) thanks to `v-model`.
-<br>
-
-You can check on StackBlitz a lighter demo for [Vue](https://stackblitz.com/edit/playground-zavant-vue?file=src/App.vue) and [Nuxt](https://stackblitz.com/edit/playground-zavant-nuxt?file=nuxt.config.ts).
-
 <script setup>
 import {ZAvant, ZAvantMenu, ZAvantItem} from '@zoom-avant/vue'
 import {ref} from 'vue'
@@ -89,6 +82,12 @@ button:not([class]) {
   }
 }
 </style>
+
+<a href="/" class="back">Go back to the documentation</a>
+
+This is a demo of ZoomAvant with all props/slots. It uses custom [styles](/guide/styles.html) and also it is [Control programatically](/guide/usage.html#control-programatically) thanks to `v-model`.
+
+You can check on StackBlitz a lighter demo for [Vue](https://stackblitz.com/edit/playground-zavant-vue?file=src/App.vue) and [Nuxt](https://stackblitz.com/edit/playground-zavant-nuxt?file=nuxt.config.ts).
 
 <div class="demo">
     <p>Path of the v-model : {{ model }}</p>
