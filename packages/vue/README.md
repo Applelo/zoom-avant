@@ -16,4 +16,6 @@ yarn add -D @zoom-avant/vue
 pnpm add -D @zoom-avant/vue
 ```
 
-Next, read the [documentation](https://applelo.github.io/zoom-avant/guide/)
+## Next
+
+Read the **[documentation](https://applelo.github.io/zoom-avant/guide/)**
