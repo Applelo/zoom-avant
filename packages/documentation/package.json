@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@stackblitz/sdk": "^1.8.1",
+    "@zoom-avant/vue": "=>0.7.0 <1.0.0",
+    "sass": "^1.56.1",
     "vitepress": "1.0.0-alpha.29",
     "vue": "^3.2.45"
   }
