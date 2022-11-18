@@ -17,9 +17,17 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
-      - run: pnpm install
+
+      - name: Install
+        run: pnpm install
+
+      - name: Install Nuxt
+        run: pnpm run -r dev:prepare
 
       - name: Build
+        run: pnpm run -r build
+
+      - name: Build Doc
         run: pnpm run -r docs:build
 
       - name: Deploy
