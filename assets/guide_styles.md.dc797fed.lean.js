@@ -1,0 +1,1 @@
+import{_ as e,b as o,e as t,m as s}from"./app.73ffecad.js";const v=JSON.parse('{"title":"Styles","description":"","frontmatter":{},"headers":[],"relativePath":"guide/styles.md"}'),a={name:"guide/styles.md"},i=s("",8),c=[i];function l(n,d,r,m,p,u){return o(),t("div",null,c)}const _=e(a,[["render",l]]);export{v as __pageData,_ as default};
